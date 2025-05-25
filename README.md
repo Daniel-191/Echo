@@ -13,8 +13,6 @@
 <br>
 
 <p align="center">
-  <a href="#-resource-links">Resource Links</a>
-  •
   <a href="#-prerequisites">Prerequisites</a>
   •
   <a href="#-getting-started">Getting Started</a>
@@ -27,15 +25,6 @@
 ### I'm pretty sure this is full of bugs and I don't want to maintain this project anymore since I am focusing on other projects. (My casino bot, its propiatery)
 
 ### If anyone opens an issue it will be looked into. But again, I am not looking to do any future updates.
-
-#### Feel free to contact me on discord! [my server](https://discord.gg/kNWkT8xWg6) or add me `mal023`
-
-## 🔗 Resource Links
-
-~~- 🤖 LIVE BOT: [Echo](https://top.gg/bot/1075434463217066014) Now on Top.gg! BOT IS OFFLINE~~
-- 🤝 Support Server: [Join Here](https://discord.gg/kNWkT8xWg6)
-- 🤝 Hire me: [Join Here](https://discord.gg/kNWkT8xWg6) or dm `mal023`
-- 📂 Documentation URL: comming soon
 
 ## 📦 Prerequisites
 
@@ -80,7 +69,7 @@ pip install -r \src\databases\requirements.txt
 - Open the terminal and run the following commands:
 
 ```
-git clone https://github.com/DanielOrourke02/Echo
+git clone https://github.com/Daniel-191/Echo
 cd Echo
 python3 -m venv venv
 source venv/bin/activate
@@ -104,15 +93,6 @@ nano config.json
 chmod +x linux_run.sh
 ./linux_run.sh
 ```
-
-<h2 align="center">
-  <br>
-  Connect with me
-  <br>
-</h2>
-
-<p align="center">Hire Me: https://discord.gg/kNWkT8xWg6 Or DM ME: mal023</p>
-
 ## General Commands
 
 | Command                   | Description                                      |
@@ -231,13 +211,3 @@ I call them 'cosmetics', but they are items you get from running: dig, hunt and 
 | `Alarm Clock`      | Alarm Clock                     | 700        | 30          |
 | `Roll`             | Roll paper for weed             | 1500       | 33          |
 | `Potato`           | Potato                          | 100        | 65          |
-
-
-<div align="center">
-  <img src="https://github.com/DanielOrourke02/Active-Projects/blob/main/images/Visual_Studio_Icon_2019.svg.png" width="48" height="48" alt="Visual Studio" />
-  <img src="https://github.com/DanielOrourke02/Active-Projects/blob/main/images/python.png" alt="Python" />
-  <img src="https://github.com/DanielOrourke02/Active-Projects/blob/main/images/html.png" alt="HTML" />
-  <img src="https://github.com/DanielOrourke02/Active-Projects/blob/main/images/css.png" alt="CSS" />
-  <img src="https://github.com/DanielOrourke02/Active-Projects/blob/main/images/C%2B%2B.png" alt="C++" />
-  <img src="https://github.com/DanielOrourke02/Active-Projects/blob/main/images/linux.png" alt="Linux" />
-</div>
