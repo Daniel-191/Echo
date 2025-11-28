@@ -2,8 +2,8 @@
 Help commands
 """
 
-from utilities import *
-from eco_support import *
+from utils.utilities import *
+from utils.eco_support import *
 
 
 economy_command_descriptions = {

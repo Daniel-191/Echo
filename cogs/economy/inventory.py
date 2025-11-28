@@ -6,8 +6,8 @@ Handles buying, selling, trading, and viewing inventories.
 from discord.ext import commands
 import discord
 from collections import Counter
-from utilities import *
-from eco_support import *
+from utils.utilities import *
+from utils.eco_support import *
 
 
 class InventoryCommands(commands.Cog):
@@ -313,7 +313,7 @@ class InventoryCommands(commands.Cog):
     @commands.check(is_admin)
     async def cool_bypass(self, ctx):
         """[ADMIN] Clear all cooldowns."""
-        conn = sqlite3.connect('src/databases/cooldowns.db')
+        conn = sqlite3.connect('data/cooldowns.db')
         cursor = conn.cursor()
         cursor.execute("DELETE FROM cooldowns WHERE type != 'interest' AND type != 'farming'")
         conn.commit()

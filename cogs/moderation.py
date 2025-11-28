@@ -3,7 +3,7 @@ Moderation commands
 e.g ban, kick, mute etc
 """
 
-from utilities import *
+from utils.utilities import *
 
 
 class Moderation(commands.Cog):

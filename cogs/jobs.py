@@ -9,8 +9,8 @@ from discord.ui import Button, View
 from colorama import Fore
 import random
 import time
-from utilities import *
-from eco_support import *
+from utils.utilities import *
+from utils.eco_support import *
 
 
 class JobButton(Button):

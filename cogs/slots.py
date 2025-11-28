@@ -3,8 +3,8 @@ Slots game - Not made by me
 I can't find original source!
 """
 
-from utilities import *
-from eco_support import *
+from utils.utilities import *
+from utils.eco_support import *
 
 
 class Slots(commands.Cog):
@@ -48,7 +48,7 @@ class Slots(commands.Cog):
                 await ctx.send(embed=embed)
                 return
             
-            path = os.path.join('src/pictures/')
+            path = os.path.join('assets/images/')
             facade = Image.open(f'{path}slot-face.png').convert('RGBA')
             reel = Image.open(f'{path}slot-reel.png').convert('RGBA')
 
@@ -84,7 +84,7 @@ class Slots(commands.Cog):
                 images.append(bg)
 
             unique_filename = str(uuid.uuid4()) + '.gif'
-            fp = os.path.join('src/pictures/', unique_filename)
+            fp = os.path.join('assets/images/', unique_filename)
 
             images[0].save(
                 fp,

@@ -3,7 +3,7 @@ Just random commands
 e.g ping, say, dice etc
 """
 
-from utilities import *
+from utils.utilities import *
 
 
 class Fun(commands.Cog):

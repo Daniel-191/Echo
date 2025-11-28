@@ -12,7 +12,7 @@ from pathlib import Path
 class Database:
     """Manages database connections and operations for the bot."""
 
-    def __init__(self, db_dir: str = 'src/databases'):
+    def __init__(self, db_dir: str = 'data'):
         """
         Initialize database connections.
 

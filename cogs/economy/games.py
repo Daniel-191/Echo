@@ -6,8 +6,8 @@ Handles money-earning activities and gambling games.
 from discord.ext import commands
 import discord
 import random
-from utilities import *
-from eco_support import *
+from utils.utilities import *
+from utils.eco_support import *
 
 
 class GameCommands(commands.Cog):

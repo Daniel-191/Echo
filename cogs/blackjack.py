@@ -3,7 +3,7 @@ Blackjack game - Not made by me
 I can't find original source!
 """
 
-from eco_support import *
+from utils.eco_support import *
 
 
 class Blackjack(commands.Cog):
@@ -22,10 +22,10 @@ class Blackjack(commands.Cog):
             List[Image.Image]: List of card images.
 
         Note:
-            - Reads card images from the 'src/cards/' directory.
+            - Reads card images from the 'assets/cards/' directory.
         """
         return [
-            Image.open(os.path.join('src/cards/', card.image))
+            Image.open(os.path.join('assets/cards/', card.image))
             for card in hand
         ]
 
@@ -43,12 +43,12 @@ class Blackjack(commands.Cog):
             Image.Image: The resulting image of the blackjack table with cards.
 
         Note:
-            - The function uses a background table image ('src/pictures/table.png').
+            - The function uses a background table image ('assets/images/table.png').
             - Cards from each hand are placed on the table.
             - The cards are arranged in a visually centered manner.
             - Cards are spaced vertically by 15 pixels and horizontally by 10 pixels.
         """
-        bg: Image.Image = Image.open('src/pictures/table.png')  # Load table image
+        bg: Image.Image = Image.open('assets/images/table.png')  # Load table image
         bg_center_x = bg.size[0] // 2  # Calculate x position for center
         bg_center_y = bg.size[1] // 2  # Calculate y position for center
 

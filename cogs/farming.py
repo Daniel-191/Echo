@@ -7,8 +7,8 @@ from discord.ext import commands
 import discord
 from colorama import Fore
 import time
-from utilities import *
-from eco_support import *
+from utils.utilities import *
+from utils.eco_support import *
 
 
 class Farming(commands.Cog):

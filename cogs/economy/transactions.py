@@ -5,8 +5,8 @@ Handles payments, deposits, withdrawals, and balance viewing.
 
 from discord.ext import commands
 import discord
-from utilities import *
-from eco_support import *
+from utils.utilities import *
+from utils.eco_support import *
 
 
 class TransactionCommands(commands.Cog):
