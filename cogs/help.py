@@ -4,6 +4,7 @@ Help commands
 
 from utils.utilities import *
 from utils.eco_support import *
+from utils.constants import COLOR_SUCCESS, COLOR_INFO, COLOR_ERROR
 
 
 economy_command_descriptions = {
@@ -68,7 +69,7 @@ class Help(commands.Cog):
             "avatar <@user>": "Get someones avatar or your own"
         }
 
-        embed = discord.Embed(title="Bot Commands", description="List of available commands:", color=discord.Color.green())
+        embed = discord.Embed(title="Bot Commands", description="List of available commands:", color=COLOR_SUCCESS)
         for cmd, desc in command_descriptions.items():
             embed.add_field(name=f"{prefix}{cmd}", value=desc, inline=True)
 
@@ -94,7 +95,7 @@ class Help(commands.Cog):
             "ticket_panel": "Setup a ticket panel"
         }
 
-        embed = discord.Embed(title="Moderation Commands", description="List of available moderation commands:", color=discord.Color.green())
+        embed = discord.Embed(title="Moderation Commands", description="List of available moderation commands:", color=COLOR_SUCCESS)
         for cmd, desc in moderation_descriptions.items():
             embed.add_field(name=f"{prefix}{cmd}", value=desc, inline=True)
 
@@ -157,7 +158,7 @@ class Help(commands.Cog):
             embed = discord.Embed(
                 title="Item Shop",
                 description="Here are the items you can buy:",
-                color=discord.Color.blue()
+                color=COLOR_INFO
             )
 
             conn = sqlite3.connect(ITEMS_DB)
@@ -191,7 +192,7 @@ class Help(commands.Cog):
             embed = discord.Embed(
                 title="Error",
                 description=f"An error occurred while fetching item data from the database. Please try again later.",
-                color=discord.Color.red()
+                color=COLOR_ERROR
             )
             embed.set_footer(text=f"Need some help? Do {ctx.prefix}tutorial")
             await ctx.send(embed=embed)

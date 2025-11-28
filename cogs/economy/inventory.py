@@ -8,6 +8,7 @@ import discord
 from collections import Counter
 from utils.utilities import *
 from utils.eco_support import *
+from utils.constants import COLOR_SUCCESS, COLOR_ERROR, FOOTER_HELP
 
 
 class InventoryCommands(commands.Cog):
@@ -32,7 +33,7 @@ class InventoryCommands(commands.Cog):
                 embed_title = f"{user.display_name}'s Inventory"
 
             embed = discord.Embed(title=embed_title, color=discord.Colour.blue())
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
 
             for item, count in item_counts.items():
                 embed.add_field(name=item, value=f"Count: {count}", inline=True)
@@ -50,9 +51,9 @@ class InventoryCommands(commands.Cog):
                 embed = discord.Embed(
                     title="Incorrect Buy Usage",
                     description=f"{ctx.author.mention}, Please specify an item name. Usage: `{prefix}buy <item_name> <amount>`",
-                    color=discord.Color.red()
+                    color=COLOR_ERROR
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
@@ -62,9 +63,9 @@ class InventoryCommands(commands.Cog):
                 embed = discord.Embed(
                     title="Item Not Found",
                     description=f"{ctx.author.mention}, Item not found in the shop.",
-                    color=discord.Color.red()
+                    color=COLOR_ERROR
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
@@ -77,9 +78,9 @@ class InventoryCommands(commands.Cog):
                 embed = discord.Embed(
                     title="Insufficient Funds",
                     description=f"{ctx.author.mention}, You don't have enough credits to buy this item.",
-                    color=discord.Color.red()
+                    color=COLOR_ERROR
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
@@ -93,9 +94,9 @@ class InventoryCommands(commands.Cog):
             embed = discord.Embed(
                 title="Purchase Successful",
                 description=f"{ctx.author.mention}, You have successfully bought **{item_name}** for **{total} credits**.",
-                color=discord.Color.green()
+                color=COLOR_SUCCESS
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
 
         except Exception as e:
@@ -103,9 +104,9 @@ class InventoryCommands(commands.Cog):
             embed = discord.Embed(
                 title="Error",
                 description=f"An error occurred while processing your request. Please try again later.",
-                color=discord.Color.red()
+                color=COLOR_ERROR
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
 
     @commands.command()
@@ -121,7 +122,7 @@ class InventoryCommands(commands.Cog):
                     description=f"{ctx.author.mention}, Incorrect usage. Please use: `{prefix}sell <item> <amount>`",
                     color=embed_error
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
@@ -131,7 +132,7 @@ class InventoryCommands(commands.Cog):
                     description=f"{ctx.author.mention}, You don't have this in your inventory.",
                     color=embed_error
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
@@ -163,7 +164,7 @@ class InventoryCommands(commands.Cog):
                     description=f"{ctx.author.mention}, That Item ID is invalid/does not exist.",
                     color=embed_error
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
@@ -177,9 +178,9 @@ class InventoryCommands(commands.Cog):
             embed = discord.Embed(
                 title="Item Sold",
                 description=f"{ctx.author.mention}, You sold **{amount} {item_id} for 💵 {item_sell_price} credits**. Your new balance is: 💵 **{get_user_balance(user_id)} credits**!",
-                color=discord.Color.green()
+                color=COLOR_SUCCESS
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
         except Exception as e:
             print(e)
@@ -195,7 +196,7 @@ class InventoryCommands(commands.Cog):
                 description=f"{ctx.author.mention}, Incorrect usage. Please use: `{prefix}trade <@user> <item2give>`",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -205,7 +206,7 @@ class InventoryCommands(commands.Cog):
                 description=f"{ctx.author.mention}, Incorrect usage. Please use: `{prefix}trade <@user> <item2give>`",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -217,7 +218,7 @@ class InventoryCommands(commands.Cog):
                 description=f"{ctx.author.mention}, You **dont have {item_name}** in your inventory!",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -227,9 +228,9 @@ class InventoryCommands(commands.Cog):
         embed = discord.Embed(
             title="Trade successfull",
             description=f"{ctx.author.mention}, You have **given {item_name} to {user}**!",
-            color=discord.Color.green(),
+            color=COLOR_SUCCESS,
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
     # Admin Commands
@@ -241,9 +242,9 @@ class InventoryCommands(commands.Cog):
         embed = discord.Embed(
             title="Credits Given!",
             description=f"Admin {ctx.author.display_name} has given **{amount} credits** to {user.display_name}.",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
     @give.error
@@ -254,7 +255,7 @@ class InventoryCommands(commands.Cog):
                 description=f"{ctx.author.mention}, You don't have permission to use this command.",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
 
     @commands.command()
@@ -264,9 +265,9 @@ class InventoryCommands(commands.Cog):
         embed = discord.Embed(
             title="Item Removal success",
             description=f"{ctx.author.mention}, I have successfully removed **{amount} {item}'s from {user.mention}'s** inventory.",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
         for i in range(0, amount):
@@ -280,7 +281,7 @@ class InventoryCommands(commands.Cog):
                 description=f"{ctx.author.mention}, You don't have permission to use this command.",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
 
     @commands.command()
@@ -290,9 +291,9 @@ class InventoryCommands(commands.Cog):
         embed = discord.Embed(
             title="Item Add success",
             description=f"{ctx.author.mention}, I have successfully Added **{amount} {item}'s to {user.mention}'s** inventory.",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
         for i in range(0, amount):
@@ -306,7 +307,7 @@ class InventoryCommands(commands.Cog):
                 description=f"{ctx.author.mention}, You don't have permission to use this command.",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
 
     @commands.command()
@@ -322,9 +323,9 @@ class InventoryCommands(commands.Cog):
         embed = discord.Embed(
             title="Cooldowns Wiped",
             description=f"Admin {ctx.author.display_name} has just wiped all cooldowns! (except for interest on banks and farming)",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
     @cool_bypass.error
@@ -335,7 +336,7 @@ class InventoryCommands(commands.Cog):
                 description=f"{ctx.author.mention}, You don't have permission to use this command.",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
 
 

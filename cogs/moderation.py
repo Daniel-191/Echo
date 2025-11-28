@@ -1,9 +1,10 @@
 """
-Moderation commands 
+Moderation commands
 e.g ban, kick, mute etc
 """
 
 from utils.utilities import *
+from utils.constants import COLOR_SUCCESS, COLOR_ERROR
 
 
 class Moderation(commands.Cog):
@@ -100,7 +101,7 @@ class Moderation(commands.Cog):
         try:
             await member.kick(reason=reason)
             await member.send(f"You have been kicked in {ctx.guild.name} by an admin. Reason: {reason}") # dm user 
-            embed = discord.Embed(title="Kick", description=f"{member.mention} has been kicked.\nReason: {reason}", color=discord.Color.red())
+            embed = discord.Embed(title="Kick", description=f"{member.mention} has been kicked.\nReason: {reason}", color=COLOR_ERROR)
             
             embed.set_footer(text=f"Made by mal023")
 
@@ -115,7 +116,7 @@ class Moderation(commands.Cog):
         try:
             await member.ban(reason=reason)
             await member.send(f"You have been banned in {ctx.guild.name} by an admin. Reason: {reason}") # dm user 
-            embed = discord.Embed(title="Ban", description=f"{member.mention} has been banned.\nReason: {reason}", color=discord.Color.red())
+            embed = discord.Embed(title="Ban", description=f"{member.mention} has been banned.\nReason: {reason}", color=COLOR_ERROR)
             
             embed.set_footer(text=f"Made by mal023")
             
@@ -176,7 +177,7 @@ class Moderation(commands.Cog):
         await member.send(f"You have been unmuted in {ctx.guild.name} by an admin. Reason: {reason}")  # dm user
 
         # Create an embed for the confirmation message
-        embed = discord.Embed(title="User Unmuted", description=f"{member.mention} has been unmuted.", color=discord.Color.green())
+        embed = discord.Embed(title="User Unmuted", description=f"{member.mention} has been unmuted.", color=COLOR_SUCCESS)
         embed.add_field(name="Reason", value=reason)
         embed.add_field(text=f"Unmuted by {ctx.author}")
 
@@ -267,7 +268,7 @@ class Moderation(commands.Cog):
             embed = discord.Embed(
                 tite="Channel Unlocked",
                 description=f"Channel unlocked automatically after {duration}.",
-                color=discord.Color.green()
+                color=COLOR_SUCCESS
             )
 
             embed.set_footer(text=f"Made by mal023")
@@ -295,7 +296,7 @@ class Moderation(commands.Cog):
         embed = discord.Embed(
             tite="Channel Unlocked",
             description=f"{channel.mention} has been unlocked.",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
 
         embed.set_footer(text=f"Made by mal023")
@@ -355,7 +356,7 @@ class Moderation(commands.Cog):
         embed = discord.Embed(
             title="Incorrect usage",
             description=f"Server unlocked automatically after the duration.",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
 
         embed.set_footer(text=f"Made by mal023")
@@ -376,7 +377,7 @@ class Moderation(commands.Cog):
         embed = discord.Embed(
             title="Incorrect usage",
             description=f"Server unlocked.",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
         embed.set_footer(text=f"Made by mal023")
 

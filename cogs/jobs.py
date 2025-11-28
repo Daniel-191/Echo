@@ -11,6 +11,10 @@ import random
 import time
 from utils.utilities import *
 from utils.eco_support import *
+from utils.constants import (
+    COLOR_SUCCESS, COLOR_INFO,
+    JOB_FREELANCER_SALARY, JOB_GAMER_SALARY, JOB_CHEF_SALARY
+)
 
 
 class JobButton(Button):
@@ -42,16 +46,16 @@ class Jobs(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.jobs = {
-            "freelancer": {"salary": (50, 100), "description": "Work on various tasks for clients."},
-            "gamer": {"salary": (20, 80), "description": "Play games and earn money by streaming or winning tournaments."},
-            "chef": {"salary": (30, 70), "description": "Cook and sell delicious meals."},
+            "freelancer": {"salary": JOB_FREELANCER_SALARY, "description": "Work on various tasks for clients."},
+            "gamer": {"salary": JOB_GAMER_SALARY, "description": "Play games and earn money by streaming or winning tournaments."},
+            "chef": {"salary": JOB_CHEF_SALARY, "description": "Cook and sell delicious meals."},
         }
         self.user_jobs = {}
 
     @commands.command(aliases=['job', 'jobs', 'list_jobs'])
     async def select_job(self, ctx):
         """Select a job to earn steady income."""
-        embed = discord.Embed(title="Select a Job", description="Click a button to choose your job:", color=discord.Color.blue())
+        embed = discord.Embed(title="Select a Job", description="Click a button to choose your job:", color=COLOR_INFO)
 
         job_list = "\n".join([f"**{job.capitalize()}**: {info['description']}\nSalary: {info['salary']}" for job, info in self.jobs.items()])
 
@@ -68,7 +72,7 @@ class Jobs(commands.Cog):
             embed = discord.Embed(
                 title="Job salary collected",
                 description=f"{ctx.author.mention}, you don't have a job! Use `!job` to select one.",
-                color=discord.Color.green()
+                color=COLOR_SUCCESS
             )
             embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
             await ctx.send(embed=embed)
@@ -82,7 +86,7 @@ class Jobs(commands.Cog):
         embed = discord.Embed(
             title="Job salary collected",
             description=f"{ctx.author.mention}, you collected **{salary} credits** from your job as a {job_name}.",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
         embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
         await ctx.send(embed=embed)

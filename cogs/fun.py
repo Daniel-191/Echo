@@ -4,6 +4,7 @@ e.g ping, say, dice etc
 """
 
 from utils.utilities import *
+from utils.constants import COLOR_INFO
 
 
 class Fun(commands.Cog):

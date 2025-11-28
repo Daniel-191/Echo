@@ -4,6 +4,7 @@ I can't find original source!
 """
 
 from utils.eco_support import *
+from utils.constants import COLOR_SUCCESS, COLOR_ERROR, COLOR_INFO
 
 
 class Blackjack(commands.Cog):
@@ -174,7 +175,7 @@ class Blackjack(commands.Cog):
                 embed = discord.Embed(
                     title="Incorrect Usage",
                     description=f"Please specify an amount to gamble. Usage: `{ctx.prefix}blackjack <amount>`",
-                    color=discord.Color.red()
+                    color=COLOR_ERROR
                 )
                 embed.set_footer(text="Made by mal023")
                 await ctx.send(embed=embed)
@@ -190,7 +191,7 @@ class Blackjack(commands.Cog):
                     embed = discord.Embed(
                         title="Invalid Bet Amount",
                         description=f"{ctx.author.mention}, Please enter a valid amount.",
-                        color=discord.Color.red()
+                        color=COLOR_ERROR
                     )
                     embed.set_footer(text=f"Need some help? Do {ctx.prefix}tutorial")
                     await ctx.send(embed=embed)
@@ -200,7 +201,7 @@ class Blackjack(commands.Cog):
                 embed = discord.Embed(
                     title="Nice try",
                     description=f"Nice try but your bet has to be larger than 0",
-                    color=discord.Color.red()
+                    color=COLOR_ERROR
                 )
                 embed.set_footer(text="Made by mal023")
                 await ctx.send(embed=embed)
@@ -212,7 +213,7 @@ class Blackjack(commands.Cog):
                 embed = discord.Embed(
                     title="Insufficient Balance",
                     description=f"Go get some money. **You have {bal} and you need {bet - bal} more.**",
-                    color=discord.Color.red()
+                    color=COLOR_ERROR
                 )
                 embed.set_footer(text="Made by mal023")
                 await ctx.send(embed=embed)
@@ -320,9 +321,9 @@ class Blackjack(commands.Cog):
                     result = ("You win!", 'won')
 
             color = (
-                discord.Color.red() if result[1] == 'lost'
-                else discord.Color.green() if result[1] == 'won'
-                else discord.Color.blue()
+                COLOR_ERROR if result[1] == 'lost'
+                else COLOR_SUCCESS if result[1] == 'won'
+                else COLOR_INFO
             )
             try:
                 await msg.delete()

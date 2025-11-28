@@ -7,6 +7,7 @@ from discord.ext import commands
 import discord
 from utils.utilities import *
 from utils.eco_support import *
+from utils.constants import COLOR_SUCCESS, COLOR_ERROR, FOOTER_HELP
 
 
 class TransactionCommands(commands.Cog):
@@ -24,7 +25,7 @@ class TransactionCommands(commands.Cog):
                 description=f"{ctx.author.mention}, Please specify an amount to pay. Usage: `{prefix}pay <@user> <amount>`",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -34,7 +35,7 @@ class TransactionCommands(commands.Cog):
                 description=f"{ctx.author.mention}, Please specify a user. Usage: `{prefix}pay <@user> <amount>`",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -47,7 +48,7 @@ class TransactionCommands(commands.Cog):
                 description=f"{ctx.author.mention}, Yeah nah you cant pay yourself.",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -57,7 +58,7 @@ class TransactionCommands(commands.Cog):
                 description=f"{ctx.author.mention}, go get some money you're way too poor buddy.",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -67,9 +68,9 @@ class TransactionCommands(commands.Cog):
         embed = discord.Embed(
             title="Payment Successful",
             description=f"{ctx.author.mention}, 💵 You just paid {user.display_name} **{amount} credits**!",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
     @commands.command()
@@ -83,7 +84,7 @@ class TransactionCommands(commands.Cog):
                 description=f"{ctx.author.mention}, Incorrect deposit usage, please use: `{prefix}deposit <amount>`",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
         else:
@@ -95,7 +96,7 @@ class TransactionCommands(commands.Cog):
                     description=f"{ctx.author.mention}, Please enter a valid amount.",
                     color=embed_error
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
@@ -105,7 +106,7 @@ class TransactionCommands(commands.Cog):
                 description=f"{ctx.author.mention}, Please enter a valid amount.",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -118,9 +119,9 @@ class TransactionCommands(commands.Cog):
         embed = discord.Embed(
             title="Deposit Successful",
             description=f'{ctx.author.mention}, 💵 **{amount_to_deposit} credits** has been deposited to your sussy account.',
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
     @commands.command()
@@ -132,7 +133,7 @@ class TransactionCommands(commands.Cog):
                 description=f'{ctx.author.mention}, Incorrect withdraw usage. Please use: `{prefix}withdraw <amount>`',
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -147,7 +148,7 @@ class TransactionCommands(commands.Cog):
                     description=f"{ctx.author.mention}, Please enter a valid amount.",
                     color=embed_error
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
@@ -157,7 +158,7 @@ class TransactionCommands(commands.Cog):
                 description=f'{ctx.author.mention}, Invalid withdraw amount. Please try again.',
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -167,9 +168,9 @@ class TransactionCommands(commands.Cog):
         embed = discord.Embed(
             title="Withdraw Successful",
             description=f'{ctx.author.mention}, 💵 **{amount} credits** have been withdrawn from your sussy account.',
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
     @commands.command(aliases=['bal'])
@@ -185,9 +186,9 @@ class TransactionCommands(commands.Cog):
             embed = discord.Embed(
                 title=f"**{user.display_name}'s** Balance",
                 description=f'On Hand: **{pocket_money} credits**\nBank Balance: **{bank_balance}/{max_bank_size} credits**',
-                color=discord.Color.green()
+                color=COLOR_SUCCESS
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
         except Exception as e:
             await ctx.send(f"An error occurred: {e}")
@@ -210,14 +211,14 @@ class TransactionCommands(commands.Cog):
             embed = discord.Embed(
                 title=f"💰 {user.display_name}'s Balance 💰",
                 description=f'💼 Wallet: **{pocket_money} credits**💼\n🏦 Bank Account: **{bank_balance}/{max_bank_size} credits**🏦\n\n🛍️ Assets: **{total_inventory_value}** credits🛍️',
-                color=discord.Color.green()
+                color=COLOR_SUCCESS
             )
 
             embed.set_thumbnail(url=user.avatar.url if user.avatar else user.default_avatar_url)
 
             embed.add_field(name="💰 NETWORTH 💰", value=f"**{total_balance}** credits", inline=False)
 
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
 
             await ctx.send(embed=embed)
         except Exception as e:
@@ -251,7 +252,7 @@ class TransactionCommands(commands.Cog):
 
             embed = discord.Embed(
                 title="💰 Highest Networths 💰",
-                color=discord.Color.green()
+                color=COLOR_SUCCESS
             )
 
             for rank, (member_id, balance) in enumerate(user_balances[:10], start=1):
@@ -266,7 +267,7 @@ class TransactionCommands(commands.Cog):
             else:
                 embed.add_field(name="Your Rank", value="**You are not ranked in the top net worths.**", inline=False)
 
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
 
             await ctx.send(embed=embed)
 

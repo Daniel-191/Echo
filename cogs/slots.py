@@ -5,6 +5,7 @@ I can't find original source!
 
 from utils.utilities import *
 from utils.eco_support import *
+from utils.constants import COLOR_SUCCESS, COLOR_ERROR, SLOTS_WIN_CHANCE
 
 
 class Slots(commands.Cog):
@@ -30,7 +31,7 @@ class Slots(commands.Cog):
                 embed = discord.Embed(
                     title="Invalid Bet",
                     description=f"{ctx.author.mention}, Please enter a valid bet amount. Usage: `{ctx.prefix}slots <bet>`",
-                    color=discord.Color.red()
+                    color=COLOR_ERROR
                 )
                 embed.set_footer(text=f"Made by mal023")
                 await ctx.send(embed=embed)
@@ -42,7 +43,7 @@ class Slots(commands.Cog):
                 embed = discord.Embed(
                     title="Nice try",
                     description=f"Nice try but your bet has to be larger than 0",
-                    color=discord.Color.red()
+                    color=COLOR_ERROR
                 )
                 embed.set_footer(text="Made by mal023")
                 await ctx.send(embed=embed)
@@ -60,9 +61,7 @@ class Slots(commands.Cog):
             s2 = random.randint(1, items - 1)
             s3 = random.randint(1, items - 1)
 
-            win_rate = 25 / 100
-
-            if random.random() < win_rate:
+            if random.random() < SLOTS_WIN_CHANCE:
                 symbols_weights = [3.5, 7, 15, 25, 55]
                 x = round(random.random() * 100, 1)
                 pos = bisect.bisect(symbols_weights, x)
@@ -109,7 +108,7 @@ class Slots(commands.Cog):
                 title=f'{ctx.author.display_name}, You {result[0]} {result[1]} credits' +
                       ('.' if result[0] == 'lost' else '!'),
                 description=f'{ctx.author.display_name}, You now have **£{get_user_balance(ctx.author.id)}**',
-                color=discord.Color.red() if result[0] == "lost" else discord.Color.green()
+                color=COLOR_ERROR if result[0] == "lost" else COLOR_SUCCESS
             )
 
             embed.set_image(url=f"attachment://{unique_filename}")
@@ -125,7 +124,7 @@ class Slots(commands.Cog):
             embed = discord.Embed(
                 title="Slots Cooldown!",
                 description=f"{ctx.author.mention}, woah slow down there buddy! The slot can run again in {error.retry_after:.2f} seconds.",
-                color=discord.Color.red()
+                color=COLOR_ERROR
             )
             embed.set_footer(text="Made by mal023")
             await ctx.send(embed=embed)

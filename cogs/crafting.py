@@ -9,6 +9,7 @@ from colorama import Fore
 import time
 from utils.utilities import *
 from utils.eco_support import *
+from utils.constants import COLOR_SUCCESS, COLOR_ERROR
 
 
 class Crafting(commands.Cog):
@@ -83,7 +84,7 @@ class Crafting(commands.Cog):
 
                     add_item_to_inventory(user_id, recipe['result'])
 
-                    embed = discord.Embed(title="Crafting Successful", description=f"You have crafted {recipe['result']}.", color=discord.Color.green())
+                    embed = discord.Embed(title="Crafting Successful", description=f"You have crafted {recipe['result']}.", color=COLOR_SUCCESS)
                     embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
                     await ctx.send(embed=embed)
             else:

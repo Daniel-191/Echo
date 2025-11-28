@@ -8,6 +8,15 @@ import discord
 import random
 from utils.utilities import *
 from utils.eco_support import *
+from utils.constants import (
+    COLOR_SUCCESS, COLOR_ERROR,
+    DIG_CREDITS_MIN, DIG_CREDITS_MAX,
+    HUNT_CREDITS_MIN, HUNT_CREDITS_MAX,
+    SCAVENGE_CREDITS_MIN, SCAVENGE_CREDITS_MAX,
+    BEG_CREDITS_MIN, BEG_CREDITS_MAX,
+    GAMBLE_WIN_CHANCE, ROB_SUCCESS_CHANCE, ROB_PERCENTAGE,
+    FOOTER_HELP
+)
 
 
 class GameCommands(commands.Cog):
@@ -29,7 +38,7 @@ class GameCommands(commands.Cog):
                 description=f"{ctx.author.mention}, digging with your hands? We arn't animals, **go buy or find a shovel**.",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -39,7 +48,7 @@ class GameCommands(commands.Cog):
                 description=f"{ctx.author.mention}, You're on a **1min break** buddy 🤫 don't chat to me.",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -50,20 +59,20 @@ class GameCommands(commands.Cog):
         embed = discord.Embed(
             title=f"{ctx.author.display_name}, Item Found",
             description=f"🎉 You found: **{won_item['name']}**! 🎉 Check your inventory with `{prefix}inventory`.",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
-        amount = random.randint(1000, 1600)
+        amount = random.randint(DIG_CREDITS_MIN, DIG_CREDITS_MAX)
         update_user_balance(ctx.author.id, amount)
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name}, Credits Found",
             description=f"💵 You found: **{amount} credits**! Your new balance is: **{get_user_balance(ctx.author.id)} credits**.",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
         update_last_action_time(user_id, "dig")
@@ -80,7 +89,7 @@ class GameCommands(commands.Cog):
                 description=f"{ctx.author.mention}, You need a **bow** too shoot arrows... **Go buy or find one.**",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -90,7 +99,7 @@ class GameCommands(commands.Cog):
                 description=f"{ctx.author.mention}, You're on a **1min break. Go away**.",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -101,20 +110,20 @@ class GameCommands(commands.Cog):
         embed = discord.Embed(
             title=f"{ctx.author.display_name}, Item Found",
             description=f"🎉 You found: **{won_item['name']}**! 🎉 Check your inventory with `{prefix}inventory`",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
-        amount = random.randint(600, 1300)
+        amount = random.randint(HUNT_CREDITS_MIN, HUNT_CREDITS_MAX)
         update_user_balance(ctx.author.id, amount)
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name}, Credits Found",
             description=f"💵 You found: **{amount} credits**! Your new balance is: **{get_user_balance(ctx.author.id)} credits**.",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
         update_last_action_time(user_id, "hunt")
@@ -131,7 +140,7 @@ class GameCommands(commands.Cog):
                     description=f"{ctx.author.mention}, **1min cooldown** lmao.",
                     color=embed_error
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
@@ -142,20 +151,20 @@ class GameCommands(commands.Cog):
             embed = discord.Embed(
                 title=f"{ctx.author.display_name}, Item Found",
                 description=f"🎉 You found: **{won_item['name']}**. 🎉 Check your inventory with `{prefix}inventory`",
-                color=discord.Color.green()
+                color=COLOR_SUCCESS
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
 
-            amount = random.randint(400, 800)
+            amount = random.randint(SCAVENGE_CREDITS_MIN, SCAVENGE_CREDITS_MAX)
             update_user_balance(ctx.author.id, amount)
 
             embed = discord.Embed(
                 title=f"{ctx.author.display_name}, Credits Found",
                 description=f"💵 You found: **{amount} Credits**! Your new balance is: **{get_user_balance(ctx.author.id)} credits**.",
-                color=discord.Color.green()
+                color=COLOR_SUCCESS
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
 
             update_last_action_time(user_id, "scavenge")
@@ -173,19 +182,19 @@ class GameCommands(commands.Cog):
                 description=f"{ctx.author.mention}, You begged in the past **15s. Wait the cooldown**.",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
-        amount = random.randint(100, 200)
+        amount = random.randint(BEG_CREDITS_MIN, BEG_CREDITS_MAX)
         update_user_balance(user_id, amount)
 
         embed = discord.Embed(
             title=f"{ctx.author.display_name} is begging",
             description=f'💵 A kind man gave you **{amount} credits**.',
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
         update_last_action_time(user_id, "beg")
@@ -202,7 +211,7 @@ class GameCommands(commands.Cog):
                     description=f"{ctx.author.mention}, Nah its called **'daily' for a reason**. What are you tryna do.",
                     color=embed_error
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
@@ -211,9 +220,9 @@ class GameCommands(commands.Cog):
             embed = discord.Embed(
                 title="Daily Reward Claimed",
                 description=f'{ctx.author.mention}, You have claimed your daily reward of 💵 **{daily_reward} credits**!',
-                color=discord.Color.green()
+                color=COLOR_SUCCESS
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
 
             set_last_claim_time(user_id)
@@ -230,7 +239,7 @@ class GameCommands(commands.Cog):
                 description=f"{ctx.author.mention}, Please specify an amount to gamble. Usage: `{prefix}gamble <amount>`",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -245,7 +254,7 @@ class GameCommands(commands.Cog):
                     description=f"{ctx.author.mention}, Please enter a valid amount or 'max'.",
                     color=embed_error
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
@@ -253,20 +262,20 @@ class GameCommands(commands.Cog):
             embed = discord.Embed(
                 title="Invalid Bet Amount",
                 description=f"{ctx.author.mention}, Invalid bet amount. You can bet up to {max_bet} Credits.",
-                color=discord.Color.green()
+                color=COLOR_SUCCESS
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
-        if random.choice([True, False, False]):
+        if random.random() < GAMBLE_WIN_CHANCE:
             update_user_balance(ctx.author.id, amount)
             result_description = f"{ctx.author.mention}, You won 💵 **{amount} credits**!"
-            result_color = discord.Color.green()
+            result_color = COLOR_SUCCESS
         else:
             update_user_balance(ctx.author.id, -amount)
             result_description = f"{ctx.author.mention}, You lost 💵 **{amount} credits! Big L**."
-            result_color = embed_error
+            result_color = COLOR_ERROR
 
         result_embed = discord.Embed(
             title="Gamble Result",
@@ -287,7 +296,7 @@ class GameCommands(commands.Cog):
                 description=f"{ctx.author.mention}, Police are on the streets right now. **Wait 1h**.",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -298,7 +307,7 @@ class GameCommands(commands.Cog):
                     description=f"{ctx.author.mention}, Please specify the user to rob: `{prefix}rob <@user>`",
                     color=embed_error
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
@@ -308,14 +317,14 @@ class GameCommands(commands.Cog):
                     description=f"{ctx.author.mention}, You can't rob yourself!",
                     color=embed_error
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
             user_balance = get_user_balance(user_id)
             target_balance = get_user_balance(target_id)
 
-            amount_to_rob = int(0.2 * target_balance)
+            amount_to_rob = int(ROB_PERCENTAGE * target_balance)
 
             if user_balance < amount_to_rob:
                 embed = discord.Embed(
@@ -323,7 +332,7 @@ class GameCommands(commands.Cog):
                     description=f"{ctx.author.mention}, You don't have enough balance to rob.",
                     color=embed_error
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
@@ -333,23 +342,23 @@ class GameCommands(commands.Cog):
                     description=f"{ctx.author.mention}, Why rob a poor person! Instead, rob the rich and give to the poor.",
                     color=embed_error
                 )
-                embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+                embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
                 await ctx.send(embed=embed)
                 return
 
             success_chance = random.random()
 
-            if success_chance <= 0.45:
+            if success_chance <= ROB_SUCCESS_CHANCE:
                 update_user_balance(user_id, amount_to_rob)
                 update_user_balance(target_id, -amount_to_rob)
 
                 embed = discord.Embed(
                     title="Robbery Successful",
                     description=f"You successfully robbed {amount_to_rob} from {user.mention}!",
-                    color=discord.Color.green()
+                    color=COLOR_SUCCESS
                 )
             else:
-                loss_amount = int(0.2 * user_balance)
+                loss_amount = int(ROB_PERCENTAGE * user_balance)
                 update_user_balance(user_id, -loss_amount)
 
                 embed = discord.Embed(
@@ -358,7 +367,7 @@ class GameCommands(commands.Cog):
                     color=embed_error
                 )
 
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
 
             update_last_action_time(user_id, "rob")
@@ -383,7 +392,7 @@ class GameCommands(commands.Cog):
                 description=f"{ctx.author.mention}, You need to find a gun or craft an m4a1 to shoot people! Find a gun using `{prefix}scrap` or craft an m4a1 using `{prefix}craft m4a1` view recipes using `{prefix}recipes`!",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -393,16 +402,16 @@ class GameCommands(commands.Cog):
                 description=f"{ctx.author.mention} has just shot themself!",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
         embed = discord.Embed(
             title="Shots Fired",
             description=f"{ctx.author.mention}, Has just **shot and killed {user.mention}** in cold blood.",
-            color=discord.Color.green()
+            color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
     @commands.command()
@@ -417,7 +426,7 @@ class GameCommands(commands.Cog):
                 description=f"{ctx.author.mention}, You need C4 to blow someone up! Craft one using `{prefix}craft c4` view recipes using `{prefix}recipes`",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
@@ -427,16 +436,16 @@ class GameCommands(commands.Cog):
                 description=f"{ctx.author.mention}, has just **blown up!**",
                 color=embed_error
             )
-            embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+            embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
             await ctx.send(embed=embed)
             return
 
         embed = discord.Embed(
             title="Bombing",
             description=f"{ctx.author.mention}, has just **bombed and killed {user.mention}** with c4!",
-            color=discord.Color.green(),
+            color=COLOR_SUCCESS,
         )
-        embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
+        embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
         await ctx.send(embed=embed)
 
 

@@ -9,6 +9,7 @@ from colorama import Fore
 import time
 from utils.utilities import *
 from utils.eco_support import *
+from utils.constants import COLOR_SUCCESS, COLOR_ERROR, COLOR_WARNING
 
 
 class Farming(commands.Cog):
@@ -34,7 +35,7 @@ class Farming(commands.Cog):
 
             total_cost = amount * cost_per_carrot
 
-            embed = discord.Embed(color=discord.Color.green())
+            embed = discord.Embed(color=COLOR_SUCCESS)
 
             if user_has_plants(user_id):
                 embed.title = "Wait a Little Longer"
