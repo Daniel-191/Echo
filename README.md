@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/DanielOrourke02/Echo/blob/main/images/bot_icon.png" alt="Echo Bot Image" width="400">
+  <img src="https://github.com/Daniel-191/Echo/blob/main/images/bot_icon.png" alt="Echo Bot Image" width="400">
 </div>
 
 <h1 align="center">
@@ -43,7 +43,7 @@
 - Open command prompt (cmd.exe) and run the following commands
 
 ```
-git clone https://github.com/DanielOrourke02/Echo
+git clone https://github.com/Daniel-191/Echo
 cd Echo
 python -m venv venv
 venv\Scripts\activate
