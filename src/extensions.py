@@ -298,28 +298,6 @@ def crafting_setup(bot):
 
 
 
-# HEISTS COG
-
-
-
-
-
-class Heists(commands.Cog):
-    def __init__(self, bot) -> None:
-        self.bot = bot
-
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print(f'{Fore.LIGHTGREEN_EX}{t}{Fore.LIGHTGREEN_EX} | Heists Cog Loaded! {Fore.RESET}')
-
-
-def Heists_setup(bot):
-    bot.add_cog(Heists(bot))
-
-
-
-
-
 # JOBS COG
 # IN DEVELOPMENT, NOT ADDED YET
 
@@ -357,42 +335,42 @@ class Jobs(commands.Cog):
     @commands.command(aliases=['job', 'jobs', 'list_jobs'])
     async def select_job(self, ctx):
         embed = discord.Embed(title="Select a Job", description="Click a button to choose your job:", color=discord.Color.blue())
-        
+
         job_list = "\n".join([f"**{job.capitalize()}**: {info['description']}\nSalary: {info['salary']}" for job, info in self.jobs.items()])
-        
+
         embed.add_field(name="Available Jobs", value=job_list)
-        
+
         await ctx.send(embed=embed, view=JobView(self))
 
     @commands.command()
     async def collect_salary(self, ctx):
         job_name = self.user_jobs.get(ctx.author.id)
-        
+
         if not job_name:
             embed = discord.Embed(
                 title="Job salary collected",
                 description=f"{ctx.author.mention}, you don't have a job! Use `!job` to select one.",
                 color=discord.Color.green()
-            )           
-            
+            )
+
             embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
-            
+
             await ctx.send(embed=embed)
             return
-        
+
         job = self.jobs[job_name]
         salary = random.randint(*job['salary'])
-        
+
         update_user_balance(ctx.author.id, salary)
-        
+
         embed = discord.Embed(
             title="Job salary collected",
             description=f"{ctx.author.mention}, you collected **{salary} credits** from your job as a {job_name}.",
             color=discord.Color.green()
         )
-        
+
         embed.set_footer(text=f"Need some help? Do {prefix}tutorial")
-        
+
         await ctx.send(embed=embed)
 
 
@@ -403,72 +381,6 @@ class Jobs(commands.Cog):
 
 def setup(bot):
     bot.add_cog(Jobs(bot))
-
-
-
-
-
-# SPECIAL EVENTS COG
-
-
-
-
-
-class Events(commands.Cog):
-    def __init__(self, bot) -> None:
-        self.bot = bot
-
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print(f'{Fore.LIGHTGREEN_EX}{t}{Fore.LIGHTGREEN_EX} | Events Cog Loaded! {Fore.RESET}')
-
-
-def Events_setup(bot):
-    bot.add_cog(Events(bot))
-
-
-
-
-
-# PROPERTIES COG
-
-
-
-
-
-class Properties(commands.Cog):
-    def __init__(self, bot) -> None:
-        self.bot = bot
-
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print(f'{Fore.LIGHTGREEN_EX}{t}{Fore.LIGHTGREEN_EX} | Properties Cog Loaded! {Fore.RESET}')
-
-
-def Properties_setup(bot):
-    bot.add_cog(Properties(bot))
-
-
-
-
-
-# MONEY PRINTING COG
-
-
-
-
-
-class Printing(commands.Cog):
-    def __init__(self, bot) -> None:
-        self.bot = bot
-
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print(f'{Fore.LIGHTGREEN_EX}{t}{Fore.LIGHTGREEN_EX} | Money Printing Cog Loaded! {Fore.RESET}')
-
-
-def Printing_setup(bot):
-    bot.add_cog(Printing(bot))
 
 
 
