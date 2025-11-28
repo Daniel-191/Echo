@@ -440,15 +440,6 @@ def update_bank_balance(user_id, amount):
     conn.close()
 
 
-def update_bank_balance(user_id, amount):
-    balance = get_user_bank_balance(user_id) + amount
-    conn = sqlite3.connect(DATA_DB)
-    c = conn.cursor()
-    c.execute('REPLACE INTO user_bank_balances (user_id, balance) VALUES (?, ?)', (user_id, balance))
-    conn.commit()
-    conn.close()
-
-
 # COOLDOWN FUNCTIONS
 
 
