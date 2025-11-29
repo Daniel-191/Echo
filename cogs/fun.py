@@ -4,7 +4,7 @@ e.g ping, say, dice etc
 """
 
 from utils.utilities import *
-from utils.constants import COLOR_INFO
+from utils.constants import COLOR_INFO, FOOTER_CREDITS
 
 
 class Fun(commands.Cog):
@@ -17,7 +17,7 @@ class Fun(commands.Cog):
         latency = round(self.bot.latency * 1000)  # Latency in milliseconds
         embed = discord.Embed(title="Ping", description=f"Pong! Latency is {latency}ms", color=embed_colour)
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         await ctx.send(embed=embed) 
 
@@ -31,7 +31,7 @@ class Fun(commands.Cog):
                 color=embed_error
             )
 
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
 
             await ctx.send(embed=embed)
             return
@@ -43,14 +43,14 @@ class Fun(commands.Cog):
                 color=embed_error
             )
 
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
 
             await ctx.send(embed=embed)
             return
 
         embed = discord.Embed(title=title, description=message, color=embed_colour) 
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         await ctx.send(embed=embed)
 
@@ -60,7 +60,7 @@ class Fun(commands.Cog):
     async def invite(self, ctx):
         embed = discord.Embed(title="Add me to your server!", description=f"[Click Here!]({bot_invite})\nJoin the [Main Bot Hub](https://discord.gg/JX3zFYPY6b)!", color=embed_colour)
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         await ctx.send(embed=embed) 
 
@@ -78,7 +78,7 @@ class Fun(commands.Cog):
         embed.add_field(name="Owner", value=guild.owner.display_name, inline=True)
         embed.add_field(name="Creation Time", value=guild.created_at.strftime("%Y-%m-%d %H:%M:%S"), inline=True)
 
-        embed.set_footer(text="Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         await ctx.send(embed=embed)
 
@@ -96,7 +96,7 @@ class Fun(commands.Cog):
         embed.add_field(name="Joined Server", value=user.joined_at.strftime("%Y-%m-%d %H:%M:%S"), inline=True)
         embed.add_field(name="Account Created", value=user.created_at.strftime("%Y-%m-%d %H:%M:%S"), inline=True)
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         await ctx.send(embed=embed)
 
@@ -114,7 +114,7 @@ class Fun(commands.Cog):
             # User doesn't have an avatar, provide a default image or message
             embed.description = f"{ctx.author.mention}, This user does not have an avatar."
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         await ctx.send(embed=embed)
 
@@ -128,7 +128,7 @@ class Fun(commands.Cog):
                 color=embed_error
             )
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -137,7 +137,7 @@ class Fun(commands.Cog):
         answer = random.choice(responses)
         embed = discord.Embed(title=f"{ctx.author.display_name}'s, 🎱 Magic 8-Ball", description=f"Question: {question}\nAnswer: {answer}", color=embed_error)
         
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
         
         await ctx.send(embed=embed)
     
@@ -151,7 +151,7 @@ class Fun(commands.Cog):
                 color=embed_error
             )
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -186,7 +186,7 @@ class Fun(commands.Cog):
         embed = discord.Embed(title="Member Count", color=embed_colour)
         embed.add_field(name="Server Members", value=f"{ctx.author.mention}, This server has {member_count} members.", inline=False)
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
         
         await ctx.send(embed=embed)
 
@@ -199,7 +199,7 @@ class Fun(commands.Cog):
         embed = discord.Embed(title="Dice Roll", color=embed_colour)
         embed.add_field(name="Result", value=f"{ctx.author.mention}, You rolled a {result}!", inline=False)
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
         
         await ctx.send(embed=embed)
 
@@ -221,7 +221,7 @@ class Fun(commands.Cog):
             embed.add_field(name="Content", value=content, inline=False)
             embed.add_field(name="Author", value=author, inline=False)
 
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
         else: # if this happens open an error on github (this means the api is no longer valid or its offline)
@@ -234,7 +234,7 @@ class Fun(commands.Cog):
             # Handle the case where no expression is provided
             embed = discord.Embed(title="Error", description=f"{ctx.author.mention}, You need to provide a mathematical expression.", color=embed_error)
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -247,14 +247,14 @@ class Fun(commands.Cog):
             embed.add_field(name="Expression", value=expression, inline=False)
             embed.add_field(name="Result", value=result, inline=False)
 
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
         except Exception as e:
             # Create an error embed
             embed = discord.Embed(title="Error", description=str(e), color=embed_error)
 
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
 
@@ -272,7 +272,7 @@ class Fun(commands.Cog):
             embed.add_field(name="Setup", value=setup, inline=False)
             embed.add_field(name="Punchline", value=punchline, inline=False)
 
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             # Send the embed
             await ctx.send(embed=embed)
         except Exception as e: # if this happens its probably because the api is no longer accessible (report this on github)
@@ -291,7 +291,7 @@ class Fun(commands.Cog):
                 color=embed_error
             )
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -299,7 +299,7 @@ class Fun(commands.Cog):
         embed = discord.Embed(
             title="Coinflip",
             description=f"{ctx.author.mention} flipped a coin!",
-            color=discord.Colour.blue()
+            color=COLOR_INFO
         )
         embed.add_field(name="Your Choice", value=choice.capitalize(), inline=True)
         embed.add_field(name="Result", value=result.capitalize(), inline=True)
@@ -309,7 +309,7 @@ class Fun(commands.Cog):
         else:
             embed.add_field(name="Outcome", value="Better luck next time!", inline=False)
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         await ctx.send(embed=embed)
 

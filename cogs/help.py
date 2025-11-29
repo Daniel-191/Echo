@@ -4,7 +4,10 @@ Help commands
 
 from utils.utilities import *
 from utils.eco_support import *
-from utils.constants import COLOR_SUCCESS, COLOR_INFO, COLOR_ERROR
+from utils.constants import (
+    COLOR_SUCCESS, COLOR_INFO, COLOR_ERROR,
+    ITEMS_PER_PAGE_ECONOMY, VIEW_TIMEOUT, FOOTER_CREDITS
+)
 
 
 economy_command_descriptions = {
@@ -73,7 +76,7 @@ class Help(commands.Cog):
         for cmd, desc in command_descriptions.items():
             embed.add_field(name=f"{prefix}{cmd}", value=desc, inline=True)
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         await ctx.send(embed=embed)
 
@@ -99,14 +102,14 @@ class Help(commands.Cog):
         for cmd, desc in moderation_descriptions.items():
             embed.add_field(name=f"{prefix}{cmd}", value=desc, inline=True)
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
         
         await ctx.send(embed=embed)
 
 
     @commands.command(aliases=['eco'])
     async def economy(self, ctx):
-        items_per_page = 15
+        items_per_page = ITEMS_PER_PAGE_ECONOMY
         total_items = len(economy_command_descriptions)
         num_pages = (total_items // items_per_page) + (1 if total_items % items_per_page != 0 else 0)
 
@@ -119,7 +122,7 @@ class Help(commands.Cog):
         for cmd, desc in list(economy_command_descriptions.items())[start_index:end_index]:
             embed.add_field(name=f"{cmd}", value=desc, inline=True)
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         message = await ctx.send(embed=embed)
 
@@ -132,7 +135,7 @@ class Help(commands.Cog):
 
         while True:
             try:
-                reaction, _ = await self.bot.wait_for('reaction_add', timeout=60, check=check)
+                reaction, _ = await self.bot.wait_for('reaction_add', timeout=VIEW_TIMEOUT, check=check)
                 if str(reaction.emoji) == '▶️' and current_page < num_pages - 1:
                     current_page += 1
                 elif str(reaction.emoji) == '◀️' and current_page > 0:
@@ -184,7 +187,7 @@ class Help(commands.Cog):
 
             conn.close()
 
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             await ctx.send(embed=embed)
 
         except Exception as e:
@@ -200,7 +203,7 @@ class Help(commands.Cog):
 
     @commands.command(aliases=['cosmos', 'cos', 'cosmetic'])
     async def cosmetics(self, ctx):
-        items_per_page = 15
+        items_per_page = ITEMS_PER_PAGE_ECONOMY
         total_items = len(combined_items)
         num_pages = (total_items // items_per_page) + (1 if total_items % items_per_page != 0 else 0)
 
@@ -215,7 +218,7 @@ class Help(commands.Cog):
             sell_price = item_info["sell"]
             embed.add_field(name=f"{item_id}: {name}", value=f"Sell Price: {sell_price}", inline=True)
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
         
         message = await ctx.send(embed=embed)
 
@@ -228,7 +231,7 @@ class Help(commands.Cog):
 
         while True:
             try:
-                reaction, _ = await self.bot.wait_for('reaction_add', timeout=60, check=check)
+                reaction, _ = await self.bot.wait_for('reaction_add', timeout=VIEW_TIMEOUT, check=check)
                 if str(reaction.emoji) == '▶️' and current_page < num_pages - 1:
                     current_page += 1
                 elif str(reaction.emoji) == '◀️' and current_page > 0:
@@ -264,7 +267,7 @@ class Help(commands.Cog):
                     color=discord.Color.gold(),
                 )
                 
-                embed.set_footer(text=f"Made by mal023")
+                embed.set_footer(text=FOOTER_CREDITS)
                 
                 await ctx.send(embed=embed)
             
@@ -283,7 +286,7 @@ class Help(commands.Cog):
                 color=discord.Color.gold(),
             )
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed, view=view)
         except Exception as e:

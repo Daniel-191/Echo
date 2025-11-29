@@ -4,7 +4,11 @@ I can't find original source!
 """
 
 from utils.eco_support import *
-from utils.constants import COLOR_SUCCESS, COLOR_ERROR, COLOR_INFO
+from utils.constants import (
+    COLOR_SUCCESS, COLOR_ERROR, COLOR_INFO,
+    PATH_CARDS, PATH_IMAGES, VIEW_TIMEOUT,
+    CARD_VALUE_ACE_HIGH, CARD_VALUE_ACE_LOW, CARD_VALUE_FACE
+)
 
 
 class Blackjack(commands.Cog):
@@ -26,7 +30,7 @@ class Blackjack(commands.Cog):
             - Reads card images from the 'assets/cards/' directory.
         """
         return [
-            Image.open(os.path.join('assets/cards/', card.image))
+            Image.open(os.path.join(PATH_CARDS, card.image))
             for card in hand
         ]
 
@@ -49,7 +53,7 @@ class Blackjack(commands.Cog):
             - The cards are arranged in a visually centered manner.
             - Cards are spaced vertically by 15 pixels and horizontally by 10 pixels.
         """
-        bg: Image.Image = Image.open('assets/images/table.png')  # Load table image
+        bg: Image.Image = Image.open(os.path.join(PATH_IMAGES, 'table.png'))  # Load table image
         bg_center_x = bg.size[0] // 2  # Calculate x position for center
         bg_center_y = bg.size[1] // 2  # Calculate y position for center
 
@@ -135,15 +139,15 @@ class Blackjack(commands.Cog):
         for card in non_aces:
             if not card.down:
                 if card.symbol in 'JQK':
-                    total_sum += 10
+                    total_sum += CARD_VALUE_FACE
                 else:
                     total_sum += card.value
         for card in aces:
             if not card.down:
-                if total_sum <= 10:
-                    total_sum += 11
+                if total_sum <= CARD_VALUE_FACE:
+                    total_sum += CARD_VALUE_ACE_HIGH
                 else:
-                    total_sum += 1
+                    total_sum += CARD_VALUE_ACE_LOW
         return total_sum
 
 
@@ -177,7 +181,7 @@ class Blackjack(commands.Cog):
                     description=f"Please specify an amount to gamble. Usage: `{ctx.prefix}blackjack <amount>`",
                     color=COLOR_ERROR
                 )
-                embed.set_footer(text="Made by mal023")
+                embed.set_footer(text=FOOTER_CREDITS)
                 await ctx.send(embed=embed)
                 return
 
@@ -203,7 +207,7 @@ class Blackjack(commands.Cog):
                     description=f"Nice try but your bet has to be larger than 0",
                     color=COLOR_ERROR
                 )
-                embed.set_footer(text="Made by mal023")
+                embed.set_footer(text=FOOTER_CREDITS)
                 await ctx.send(embed=embed)
                 return
 
@@ -215,7 +219,7 @@ class Blackjack(commands.Cog):
                     description=f"Go get some money. **You have {bal} and you need {bet - bal} more.**",
                     color=COLOR_ERROR
                 )
-                embed.set_footer(text="Made by mal023")
+                embed.set_footer(text=FOOTER_CREDITS)
                 await ctx.send(embed=embed)
                 return
 
@@ -282,7 +286,7 @@ class Blackjack(commands.Cog):
                 await msg.add_reaction("🇸")
 
                 try:  # reaction command
-                    reaction, _ = await self.bot.wait_for('reaction_add', timeout=60, check=check)
+                    reaction, _ = await self.bot.wait_for('reaction_add', timeout=VIEW_TIMEOUT, check=check)
                 except asyncio.TimeoutError:
                     await msg.delete()
                     return

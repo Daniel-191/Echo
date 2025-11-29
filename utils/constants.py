@@ -34,6 +34,7 @@ COOLDOWN_DIG = 60           # 1 minute
 COOLDOWN_HUNT = 60          # 1 minute
 COOLDOWN_SCAVENGE = 60      # 1 minute
 COOLDOWN_BEG = 15           # 15 seconds
+COOLDOWN_SLOTS = 3          # 3 seconds
 COOLDOWN_INTEREST = 86400   # 24 hours (bank interest)
 
 
@@ -111,6 +112,8 @@ JOB_CHEF_SALARY = (30, 70)
 
 # Slots
 SLOTS_WIN_CHANCE = 0.25          # 25% win rate
+SLOTS_REEL_ITEM_HEIGHT = 180     # Height of each item on slot reel
+SLOTS_SPIN_SPEED = 6             # Animation speed multiplier
 
 # Blackjack
 BLACKJACK_STARTING_BALANCE = 100  # Starting chips for demo
@@ -177,6 +180,7 @@ VIEW_TIMEOUT = 180               # Seconds before views timeout
 
 # Pagination
 ITEMS_PER_PAGE = 10              # Items per page in paginated lists
+ITEMS_PER_PAGE_ECONOMY = 15      # Items per page in economy/cosmetics lists
 
 
 # ============================================================================

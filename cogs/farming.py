@@ -94,7 +94,7 @@ class Farming(commands.Cog):
                     embed = discord.Embed(
                         title="Success",
                         description=f"{ctx.author.mention}, You have successfully harvested {harvested_amount} crops and earned ${total_profit}.",
-                        color=discord.Colour.green()
+                        color=COLOR_SUCCESS
                     )
                     embed.set_footer(text=f"Need some help? Do {ctx.prefix}tutorial")
                     await ctx.send(embed=embed)
@@ -102,7 +102,7 @@ class Farming(commands.Cog):
                     embed = discord.Embed(
                         title="Crop Info",
                         description=f"{ctx.author.mention}, Your crops are not ready yet. They are {int(growth_percentage)}% grown.",
-                        color=discord.Colour.orange()
+                        color=COLOR_WARNING
                     )
                     embed.set_footer(text=f"Need some help? Do {ctx.prefix}tutorial")
                     await ctx.send(embed=embed)

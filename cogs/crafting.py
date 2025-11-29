@@ -22,7 +22,7 @@ class Crafting(commands.Cog):
     async def recipes(self, ctx):
         """Display all crafting recipes."""
         try:
-            embed = discord.Embed(title="Crafting Recipes", description="The 🎉 emoji means you have the materials to craft that item!", color=discord.Colour.green())
+            embed = discord.Embed(title="Crafting Recipes", description="The 🎉 emoji means you have the materials to craft that item!", color=COLOR_SUCCESS)
 
             user_id = ctx.author.id
             user_inventory = get_user_inventory(user_id)

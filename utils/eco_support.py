@@ -114,9 +114,19 @@ crafting_recipes = {
     }
 }
 
-DATA_DB = 'data/user_data.db'
-COOLDOWN_DB = 'data/cooldowns.db'
-ITEMS_DB = 'data/items.db'
+# Import database paths and cooldowns from constants
+from utils.constants import (
+    DB_USER_DATA as DATA_DB,
+    DB_COOLDOWNS as COOLDOWN_DB,
+    DB_ITEMS as ITEMS_DB,
+    COOLDOWN_ROB,
+    COOLDOWN_DAILY,
+    COOLDOWN_DIG,
+    COOLDOWN_HUNT,
+    COOLDOWN_SCAVENGE,
+    COOLDOWN_BEG,
+    BANK_INTEREST_RATE
+)
 
 # Create the databases and tables if they don't exist
 def initialize_databases():
@@ -305,7 +315,7 @@ def update_bank_interest(user_id, max_bank_size):
 
     if time_difference >= 24 * 60 * 60:
         bank_balance = get_user_bank_balance(user_id)
-        interest_amount = int(bank_balance * 0.10)
+        interest_amount = int(bank_balance * BANK_INTEREST_RATE)
         interest_amount = min(interest_amount, max_bank_size - bank_balance)
         
         update_bank_balance(user_id, interest_amount)
@@ -465,27 +475,27 @@ def update_last_action_time(user_id, action):
     save_cooldowns(cooldowns)
 
 def can_rob(user_id):
-    return can_perform_action(user_id, "rob", 1 * 3600)  # 1 hour in seconds
+    return can_perform_action(user_id, "rob", COOLDOWN_ROB)
 
 
 def can_claim_daily(user_id):
-    return can_perform_action(user_id, "claim", 24 * 3600)  # 24 hours in seconds
+    return can_perform_action(user_id, "claim", COOLDOWN_DAILY)
 
 
 def can_dig(user_id):
-    return can_perform_action(user_id, "dig", 1 * 60)
+    return can_perform_action(user_id, "dig", COOLDOWN_DIG)
 
 
 def can_hunt(user_id):
-    return can_perform_action(user_id, "hunt", 1 * 60)
+    return can_perform_action(user_id, "hunt", COOLDOWN_HUNT)
 
 
 def can_scavenge(user_id):
-    return can_perform_action(user_id, "scavenge", 1 * 60)
+    return can_perform_action(user_id, "scavenge", COOLDOWN_SCAVENGE)
 
 
 def can_beg(user_id):
-    return can_perform_action(user_id, "beg", 15)  # 30 seconds
+    return can_perform_action(user_id, "beg", COOLDOWN_BEG)
 
 
 def can_plant(user_id):

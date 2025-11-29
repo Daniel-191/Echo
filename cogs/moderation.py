@@ -4,7 +4,7 @@ e.g ban, kick, mute etc
 """
 
 from utils.utilities import *
-from utils.constants import COLOR_SUCCESS, COLOR_ERROR
+from utils.constants import COLOR_SUCCESS, COLOR_ERROR, FOOTER_CREDITS
 
 
 class Moderation(commands.Cog):
@@ -39,7 +39,7 @@ class Moderation(commands.Cog):
 
         embed = discord.Embed(title="Support Tickets", description=message, color=embed_colour)
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         await ctx.send(embed=embed, view=view)
 
@@ -56,7 +56,7 @@ class Moderation(commands.Cog):
             embed.description = f"{ctx.author.mention}, Incorrect usage. Please try: `{prefix}setup_verify <@role> <message>`"
             embed.color = embed_error
 
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -67,7 +67,7 @@ class Moderation(commands.Cog):
             embed.description = f"{ctx.author.mention}, Incorrect usage. Please try: `{prefix}setup_verify <@role> <message>`"
             embed.color = embed_error
 
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -90,7 +90,7 @@ class Moderation(commands.Cog):
 
         embed = discord.Embed(title="Verification Panel", description=message, color=embed_colour)
         
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
         
         await ctx.send(embed=embed, view=view)
 
@@ -103,7 +103,7 @@ class Moderation(commands.Cog):
             await member.send(f"You have been kicked in {ctx.guild.name} by an admin. Reason: {reason}") # dm user 
             embed = discord.Embed(title="Kick", description=f"{member.mention} has been kicked.\nReason: {reason}", color=COLOR_ERROR)
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
 
             await ctx.send(embed=embed)
         except discord.Forbidden:
@@ -118,7 +118,7 @@ class Moderation(commands.Cog):
             await member.send(f"You have been banned in {ctx.guild.name} by an admin. Reason: {reason}") # dm user 
             embed = discord.Embed(title="Ban", description=f"{member.mention} has been banned.\nReason: {reason}", color=COLOR_ERROR)
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
         except discord.Forbidden:
@@ -148,7 +148,7 @@ class Moderation(commands.Cog):
         embed.add_field(name="Reason", value=reason)
         embed.add_field(text=f"Muted by {ctx.author}")
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
         
         # Send the embed
         await ctx.send(embed=embed)
@@ -167,7 +167,7 @@ class Moderation(commands.Cog):
                 color=embed_error
             )
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -181,7 +181,7 @@ class Moderation(commands.Cog):
         embed.add_field(name="Reason", value=reason)
         embed.add_field(text=f"Unmuted by {ctx.author}")
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         # Send the embed
         await ctx.send(embed=embed)
@@ -193,7 +193,7 @@ class Moderation(commands.Cog):
         if amount is None:
             embed = discord.Embed(title="Error", description=f"{ctx.author.mention}, You need to specify the number of messages to clear.", color=embed_error)
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -201,7 +201,7 @@ class Moderation(commands.Cog):
         if amount > 100:
             embed = discord.Embed(title="Error", description=f"{ctx.author.mention}, You can only clear up to 100 messages at a time.", color=embed_colour) 
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -209,7 +209,7 @@ class Moderation(commands.Cog):
         await ctx.channel.purge(limit=amount + 1)
         embed = discord.Embed(title="Messages Cleared", description=f"{amount} messages have been cleared.", color=embed_colour) 
         
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
         
         await ctx.send(embed=embed)
 
@@ -227,7 +227,7 @@ class Moderation(commands.Cog):
                 color=embed_error
             )
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -237,7 +237,7 @@ class Moderation(commands.Cog):
         if seconds is None:
             embed = discord.Embed(title="Error", description="Invalid duration format. Use s, m, h, or d.", color=embed_error) 
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -246,7 +246,7 @@ class Moderation(commands.Cog):
         await channel.set_permissions(ctx.guild.default_role, send_messages=False)
         embed = discord.Embed(title="Channel Locked", description=f"{channel.mention} locked for {duration}. Reason: {reason}", color=embed_error)  
         
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
         
         await ctx.send(embed=embed)
 
@@ -271,7 +271,7 @@ class Moderation(commands.Cog):
                 color=COLOR_SUCCESS
             )
 
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
 
             await channel.send(embed=embed)
 
@@ -283,7 +283,7 @@ class Moderation(commands.Cog):
             await ctx.send("Please mention the channel you want to unlock.")
             embed = discord.Embed(title="Mention channel Plz", description=f"Please mention the channel you want to unlock: {prefix}unlockchannel #channel", color=embed_error) 
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -299,7 +299,7 @@ class Moderation(commands.Cog):
             color=COLOR_SUCCESS
         )
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         await ctx.send(embed=embed)
 
@@ -314,7 +314,7 @@ class Moderation(commands.Cog):
                 color=embed_error
             )
 
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
 
             await ctx.send(embed=embed)
             return
@@ -323,7 +323,7 @@ class Moderation(commands.Cog):
         if seconds is None:
             embed = discord.Embed(title="Error", description="Invalid duration format. Use s, m, h, or d.", color=embed_error) 
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -340,7 +340,7 @@ class Moderation(commands.Cog):
             color=embed_error
         )
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         await ctx.send(embed=embed)
 
@@ -359,7 +359,7 @@ class Moderation(commands.Cog):
             color=COLOR_SUCCESS
         )
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         await ctx.send(embed=embed)
 
@@ -379,7 +379,7 @@ class Moderation(commands.Cog):
             description=f"Server unlocked.",
             color=COLOR_SUCCESS
         )
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
 
         await inter.response.send_message(embed=embed)
 
@@ -398,7 +398,7 @@ class Moderation(commands.Cog):
                 value = '[hidden for security reasons]'  # Replace token value with asterisks
             embed.add_field(name=f'`{key}`', value=f'`{value}`', inline=False)
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
         
         await ctx.send(embed=embed)
 
@@ -412,7 +412,7 @@ class Moderation(commands.Cog):
                 color=embed_error
             )
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -424,7 +424,7 @@ class Moderation(commands.Cog):
                 color=embed_error
             )
             
-            embed.set_footer(text=f"Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             
             await ctx.send(embed=embed)
             return
@@ -441,7 +441,7 @@ class Moderation(commands.Cog):
         embed.add_field(name='**Variable**', value=key, inline=False)
         embed.add_field(name='**New Value**', value=value, inline=False)
 
-        embed.set_footer(text=f"Made by mal023")
+        embed.set_footer(text=FOOTER_CREDITS)
         
         await ctx.send(embed=embed)
 

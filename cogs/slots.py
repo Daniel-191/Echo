@@ -5,7 +5,12 @@ I can't find original source!
 
 from utils.utilities import *
 from utils.eco_support import *
-from utils.constants import COLOR_SUCCESS, COLOR_ERROR, SLOTS_WIN_CHANCE
+from utils.constants import (
+    COLOR_SUCCESS, COLOR_ERROR,
+    SLOTS_WIN_CHANCE, PATH_IMAGES,
+    COOLDOWN_SLOTS, FOOTER_CREDITS,
+    SLOTS_REEL_ITEM_HEIGHT, SLOTS_SPIN_SPEED
+)
 
 
 class Slots(commands.Cog):
@@ -24,7 +29,7 @@ class Slots(commands.Cog):
 
 
     @commands.command(aliases=['slot'])
-    @commands.cooldown(1, 3, BucketType.user)
+    @commands.cooldown(1, COOLDOWN_SLOTS, BucketType.user)
     async def slots(self, ctx: commands.Context, bet=None):
         try:
             if bet is None or not self.check_bet(ctx, bet=bet):
@@ -33,7 +38,7 @@ class Slots(commands.Cog):
                     description=f"{ctx.author.mention}, Please enter a valid bet amount. Usage: `{ctx.prefix}slots <bet>`",
                     color=COLOR_ERROR
                 )
-                embed.set_footer(text=f"Made by mal023")
+                embed.set_footer(text=FOOTER_CREDITS)
                 await ctx.send(embed=embed)
                 return
 
@@ -45,16 +50,15 @@ class Slots(commands.Cog):
                     description=f"Nice try but your bet has to be larger than 0",
                     color=COLOR_ERROR
                 )
-                embed.set_footer(text="Made by mal023")
+                embed.set_footer(text=FOOTER_CREDITS)
                 await ctx.send(embed=embed)
                 return
             
-            path = os.path.join('assets/images/')
-            facade = Image.open(f'{path}slot-face.png').convert('RGBA')
-            reel = Image.open(f'{path}slot-reel.png').convert('RGBA')
+            facade = Image.open(os.path.join(PATH_IMAGES, 'slot-face.png')).convert('RGBA')
+            reel = Image.open(os.path.join(PATH_IMAGES, 'slot-reel.png')).convert('RGBA')
 
             rw, rh = reel.size
-            item = 180
+            item = SLOTS_REEL_ITEM_HEIGHT
             items = rh // item
 
             s1 = random.randint(1, items - 1)
@@ -73,7 +77,7 @@ class Slots(commands.Cog):
                 s3 = s3 - 6 if s3 == items else s3
 
             images = []
-            speed = 6
+            speed = SLOTS_SPIN_SPEED
             for i in range(1, (item // speed) + 1):
                 bg = Image.new('RGBA', facade.size, color=(255, 255, 255))
                 bg.paste(reel, (25 + rw * 0, 100 - (speed * i * s1)))
@@ -83,7 +87,7 @@ class Slots(commands.Cog):
                 images.append(bg)
 
             unique_filename = str(uuid.uuid4()) + '.gif'
-            fp = os.path.join('assets/images/', unique_filename)
+            fp = os.path.join(PATH_IMAGES, unique_filename)
 
             images[0].save(
                 fp,
@@ -126,7 +130,7 @@ class Slots(commands.Cog):
                 description=f"{ctx.author.mention}, woah slow down there buddy! The slot can run again in {error.retry_after:.2f} seconds.",
                 color=COLOR_ERROR
             )
-            embed.set_footer(text="Made by mal023")
+            embed.set_footer(text=FOOTER_CREDITS)
             await ctx.send(embed=embed)
 
 

@@ -15,7 +15,8 @@ from utils.constants import (
     SCAVENGE_CREDITS_MIN, SCAVENGE_CREDITS_MAX,
     BEG_CREDITS_MIN, BEG_CREDITS_MAX,
     GAMBLE_WIN_CHANCE, ROB_SUCCESS_CHANCE, ROB_PERCENTAGE,
-    FOOTER_HELP
+    FOOTER_HELP,
+    COOLDOWN_BEG
 )
 
 
@@ -179,7 +180,7 @@ class GameCommands(commands.Cog):
         if not can_beg(user_id):
             embed = discord.Embed(
                 title="Cooldown Active",
-                description=f"{ctx.author.mention}, You begged in the past **15s. Wait the cooldown**.",
+                description=f"{ctx.author.mention}, You begged in the past **{COOLDOWN_BEG}s. Wait the cooldown**.",
                 color=embed_error
             )
             embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))

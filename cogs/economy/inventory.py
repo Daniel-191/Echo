@@ -8,7 +8,7 @@ import discord
 from collections import Counter
 from utils.utilities import *
 from utils.eco_support import *
-from utils.constants import COLOR_SUCCESS, COLOR_ERROR, FOOTER_HELP
+from utils.constants import COLOR_SUCCESS, COLOR_ERROR, FOOTER_HELP, DB_COOLDOWNS
 
 
 class InventoryCommands(commands.Cog):
@@ -32,7 +32,7 @@ class InventoryCommands(commands.Cog):
                 item_counts = Counter(inventory)
                 embed_title = f"{user.display_name}'s Inventory"
 
-            embed = discord.Embed(title=embed_title, color=discord.Colour.blue())
+            embed = discord.Embed(title=embed_title, color=COLOR_INFO)
             embed.set_footer(text=FOOTER_HELP.format(prefix=prefix))
 
             for item, count in item_counts.items():
@@ -314,7 +314,7 @@ class InventoryCommands(commands.Cog):
     @commands.check(is_admin)
     async def cool_bypass(self, ctx):
         """[ADMIN] Clear all cooldowns."""
-        conn = sqlite3.connect('data/cooldowns.db')
+        conn = sqlite3.connect(DB_COOLDOWNS)
         cursor = conn.cursor()
         cursor.execute("DELETE FROM cooldowns WHERE type != 'interest' AND type != 'farming'")
         conn.commit()
