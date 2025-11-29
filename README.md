@@ -144,13 +144,21 @@ Echo Bot has 40+ commands across economy, games, moderation, and fun categories.
 ### Quick Command Reference
 
 **Economy** - `.balance` `.daily` `.pay` `.deposit` `.withdraw`
+
 **Earning** - `.dig` `.hunt` `.scrap` `.beg`
+
 **Gambling** - `.gamble` `.rob` `.blackjack` `.slots`
+
 **Shop** - `.shop` `.buy` `.sell` `.inventory` `.trade`
+
 **Farming** - `.plant` `.harvest`
+
 **Crafting** - `.recipes` `.craft`
+
 **Games** - `.blackjack` `.slots` `.coinflip` `.dice`
+
 **Moderation** - `.kick` `.ban` `.mute` `.clear` `.lockchannel`
+
 **Admin** - `.give` `.additem` `.removeitem` `.config_view`
 
 ### 📖 Full Documentation
