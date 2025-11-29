@@ -5,6 +5,7 @@ e.g ban, kick, mute etc
 
 from utils.utilities import *
 from utils.constants import COLOR_SUCCESS, COLOR_ERROR, FOOTER_CREDITS
+from utils.eco_support import save_locked_channel, remove_locked_channel, get_locked_channels, is_channel_locked
 
 
 class Moderation(commands.Cog):
@@ -254,16 +255,14 @@ class Moderation(commands.Cog):
         unlock_time_str = (datetime.datetime.now() + datetime.timedelta(seconds=seconds)).strftime("%Y-%m-%d %H:%M:%S")
 
         # Save locked channel state with the time as a string
-        locked_channels[channel.id] = {"unlock_time": unlock_time_str}
-        save_locked_channels()
+        save_locked_channel(channel.id, unlock_time_str)
 
         # Schedule unlock after duration
         await asyncio.sleep(seconds)
-        if channel.id in locked_channels:  # Check if still locked
+        if is_channel_locked(channel.id):  # Check if still locked
             await channel.set_permissions(ctx.guild.default_role, send_messages=True)
 
-            del locked_channels[channel.id]
-            save_locked_channels()
+            remove_locked_channel(channel.id)
 
             embed = discord.Embed(
                 tite="Channel Unlocked",
@@ -289,9 +288,8 @@ class Moderation(commands.Cog):
             return
 
         await channel.set_permissions(ctx.guild.default_role, send_messages=True)
-        if channel.id in locked_channels:
-            del locked_channels[channel.id]
-            save_locked_channels()
+        if is_channel_locked(channel.id):
+            remove_locked_channel(channel.id)
 
         embed = discord.Embed(
             tite="Channel Unlocked",
@@ -330,9 +328,8 @@ class Moderation(commands.Cog):
 
         for channel in ctx.guild.text_channels:
             await channel.set_permissions(ctx.guild.default_role, send_messages=False)
-            locked_channels[channel.id] = {"unlock_time": datetime.datetime.now() + datetime.timedelta(seconds=seconds)}
-
-        save_locked_channels()
+            unlock_time_str = (datetime.datetime.now() + datetime.timedelta(seconds=seconds)).strftime("%Y-%m-%d %H:%M:%S")
+            save_locked_channel(channel.id, unlock_time_str)
 
         embed = discord.Embed(
             title="Incorrect usage",
@@ -345,13 +342,12 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
 
         await asyncio.sleep(seconds)
+        locked_channels = get_locked_channels()
         for channel_id in list(locked_channels.keys()):
-            channel = ctx.guild.get_channel(channel_id)
+            channel = ctx.guild.get_channel(int(channel_id))
             if channel:
                 await channel.set_permissions(ctx.guild.default_role, send_messages=True)
-                del locked_channels[channel_id]
-
-        save_locked_channels()
+                remove_locked_channel(channel_id)
 
         embed = discord.Embed(
             title="Incorrect usage",
@@ -369,10 +365,8 @@ class Moderation(commands.Cog):
     async def unlock_server(self, inter):
         for channel in inter.guild.text_channels:
             await channel.set_permissions(inter.guild.default_role, send_messages=True)
-            if str(channel.id) in locked_channels:
-                del locked_channels[str(channel.id)]
-        
-        save_locked_channels()
+            if is_channel_locked(channel.id):
+                remove_locked_channel(channel.id)
 
         embed = discord.Embed(
             title="Incorrect usage",

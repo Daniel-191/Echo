@@ -132,9 +132,9 @@ DB_DIR = 'data'
 DB_USER_DATA = 'data/user_data.db'
 DB_COOLDOWNS = 'data/cooldowns.db'
 DB_ITEMS = 'data/items.db'
+DB_LOCKED_CHANNELS = 'data/locked_channels.db'
 
 # Data Files
-FILE_LOCKED_CHANNELS = 'data/locked_channels.json'
 FILE_LOGS = 'data/logs.txt'
 
 

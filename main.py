@@ -36,7 +36,7 @@ async def setup_bot():
 
 @bot.event
 async def on_ready():
-    await lock_function(bot, save_locked_channels, unlock_channel_after_delay)
+    await lock_function(bot, unlock_channel_after_delay)
 
     print(f"{t}{Fore.LIGHTBLUE_EX} | Ready and online - {bot.user.display_name}\n{Fore.RESET}")
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"{prefix}help")) 

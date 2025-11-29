@@ -119,6 +119,7 @@ from utils.constants import (
     DB_USER_DATA as DATA_DB,
     DB_COOLDOWNS as COOLDOWN_DB,
     DB_ITEMS as ITEMS_DB,
+    DB_LOCKED_CHANNELS as LOCKED_CHANNELS_DB,
     COOLDOWN_ROB,
     COOLDOWN_DAILY,
     COOLDOWN_DIG,
@@ -170,7 +171,19 @@ def initialize_databases():
     ''')
     conn.commit()
     conn.close()
-    
+
+    # Initialize locked channels database
+    conn = sqlite3.connect(LOCKED_CHANNELS_DB)
+    c = conn.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS locked_channels (
+            channel_id TEXT PRIMARY KEY,
+            unlock_time TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
     conn = sqlite3.connect(ITEMS_DB)
     c = conn.cursor()
     # Create items table if not exists
@@ -500,6 +513,53 @@ def can_beg(user_id):
 
 def can_plant(user_id):
     return can_perform_action(user_id, "plant", growth_duration * 3600)  # 12 hours in seconds
+
+
+# ============================================================================
+# LOCKED CHANNELS DATABASE FUNCTIONS
+# ============================================================================
+
+def save_locked_channel(channel_id, unlock_time):
+    """Save a locked channel to the database."""
+    conn = sqlite3.connect(LOCKED_CHANNELS_DB)
+    c = conn.cursor()
+    c.execute('INSERT OR REPLACE INTO locked_channels (channel_id, unlock_time) VALUES (?, ?)',
+              (str(channel_id), unlock_time))
+    conn.commit()
+    conn.close()
+
+
+def remove_locked_channel(channel_id):
+    """Remove a locked channel from the database."""
+    conn = sqlite3.connect(LOCKED_CHANNELS_DB)
+    c = conn.cursor()
+    c.execute('DELETE FROM locked_channels WHERE channel_id = ?', (str(channel_id),))
+    conn.commit()
+    conn.close()
+
+
+def get_locked_channels():
+    """Get all locked channels from the database as a dictionary."""
+    conn = sqlite3.connect(LOCKED_CHANNELS_DB)
+    c = conn.cursor()
+    c.execute('SELECT channel_id, unlock_time FROM locked_channels')
+    rows = c.fetchall()
+    conn.close()
+
+    locked_channels = {}
+    for channel_id, unlock_time in rows:
+        locked_channels[channel_id] = {"unlock_time": unlock_time}
+    return locked_channels
+
+
+def is_channel_locked(channel_id):
+    """Check if a channel is locked."""
+    conn = sqlite3.connect(LOCKED_CHANNELS_DB)
+    c = conn.cursor()
+    c.execute('SELECT 1 FROM locked_channels WHERE channel_id = ?', (str(channel_id),))
+    result = c.fetchone()
+    conn.close()
+    return result is not None
 
 
 def set_last_claim_time(user_id):

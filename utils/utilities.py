@@ -44,12 +44,7 @@ embed_error = discord.Color.red() # error message for embeds
 # Just a cool logging variable
 t = f"{Fore.LIGHTYELLOW_EX}{ctime()}{Fore.RESET}"
 
-# Load the json file for locked channels
-try:
-    with open('data/locked_channels.json') as file:
-        locked_channels = json.load(file)
-except FileNotFoundError:
-    locked_channels = {}
+# Locked channels are now stored in database (loaded on-demand)
 
 # Load config from json file
 with open('config.json', 'r') as config_file:
@@ -100,18 +95,15 @@ def is_admin(ctx):
 
 # Unlock channels after the specified duration
 async def unlock_channel_after_delay(channel, delay):
+    from eco_support import is_channel_locked, remove_locked_channel
     await asyncio.sleep(delay)
-    await channel.set_permissions(channel.guild.default_role, respond_messages=True)
-    if str(channel.id) in locked_channels:
-        del locked_channels[str(channel.id)]
-        save_locked_channels()
-        await channel.respond("Channel unlocked automatically after scheduled duration.")
+    await channel.set_permissions(channel.guild.default_role, send_messages=True)
+    if is_channel_locked(channel.id):
+        remove_locked_channel(channel.id)
+        await channel.send("Channel unlocked automatically after scheduled duration.")
 
 
-# when a channel gets logs it is saved (so if the bot restarts or crashes the lock isnt lost/remoted)
-def save_locked_channels():
-    with open('data/locked_channels.json', 'w') as file:
-        json.dump(locked_channels, file)
+# Locked channels save/load functions moved to eco_support.py database functions
 
 
 # convert the users parsed duration (seconds, minutes, hours, days) into the correct value
@@ -158,9 +150,12 @@ def guilds(bot):
 # ----------------------------------------------------------CHECK LOCKED CHANNELS ON BOT LOAD----------------------------------------------------------
 
 
-async def lock_function(bot, save_locked_channels, unlock_channel_after_delay):
-    # List to store items to delete
-    channels_to_delete = []
+async def lock_function(bot, unlock_channel_after_delay):
+    """Restore locked channels from database on bot startup."""
+    from eco_support import get_locked_channels, remove_locked_channel
+
+    # Get all locked channels from database
+    locked_channels = get_locked_channels()
 
     # Reapply locks
     for channel_id, data in locked_channels.items():
@@ -169,20 +164,14 @@ async def lock_function(bot, save_locked_channels, unlock_channel_after_delay):
             unlock_time = datetime.datetime.fromisoformat(data['unlock_time'])
             if datetime.datetime.now() < unlock_time:
                 # Reapply lock
-                await channel.set_permissions(channel.guild.default_role, respond_messages=False)
+                await channel.set_permissions(channel.guild.default_role, send_messages=False)
 
                 # Schedule unlock
                 asyncio.create_task(unlock_channel_after_delay(channel, (unlock_time - datetime.datetime.now()).total_seconds()))
             else:
                 # Unlock if the time has passed
-                await channel.set_permissions(channel.guild.default_role, respond_messages=True)
-                channels_to_delete.append(channel_id)
-
-    # Delete items from locked_channels
-    for channel_id in channels_to_delete:
-        del locked_channels[channel_id]
-
-    save_locked_channels()  # Save the updated state
+                await channel.set_permissions(channel.guild.default_role, send_messages=True)
+                remove_locked_channel(channel_id)
 
 
 # ----------------------------------------------------------MAKE EMBED FUCNTION----------------------------------------------------------
