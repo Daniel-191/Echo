@@ -4,8 +4,8 @@
 
 <h1 align="center">
   <br>
-  Echo Bot v5
-  <br> 
+  Echo Bot v6 - DEPRECATED - NO LONGER MAINTAINED
+  <br>
 </h1>
 
 <p align="center">Admin, AutoMod, Economy, Fun, Invite, Information, Moderation, Owner, Social, Suggestion, Tickets, verify, Utility and More...</p>
@@ -13,201 +13,328 @@
 <br>
 
 <p align="center">
+  <a href="#-features">Features</a>
+  •
   <a href="#-prerequisites">Prerequisites</a>
   •
-  <a href="#-getting-started">Getting Started</a>
+  <a href="#-installation">Installation</a>
+  •
+  <a href="#-commands">Commands</a>
 </p>
 
 <br>
 
-# DEPRECATED - NO LONGER MAINTAINED
+## ✨ Features
 
-### I'm pretty sure this is full of bugs and I don't want to maintain this project anymore since I am focusing on other projects. (My casino bot, its propiatery)
-
-### If anyone opens an issue it will be looked into. But again, I am not looking to do any future updates.
+- 💰 **Advanced Economy System** - Earn, trade, and manage virtual currency
+- 🎮 **Interactive Games** - Blackjack, Slots, and more
+- 🌾 **Farming System** - Plant and harvest crops for profit
+- 🔨 **Crafting System** - Combine items to create valuable goods
+- 🛡️ **Moderation Tools** - Kick, ban, mute, and channel management
+- 🎲 **Fun Commands** - Jokes, quotes, QR codes, and utilities
+- 📊 **Leaderboards** - Track top players by net worth
+- 🏦 **Banking System** - Deposit money to earn daily interest
 
 ## 📦 Prerequisites
 
-- [Python3.12](https://www.python.org/downloads/release/python-3120/)
-  - [Python install help](https://www.youtube.com/watch?v=nU2Egc3Zx3Q) 
+- [Python 3.12+](https://www.python.org/downloads/release/python-3120/)
 - [Git](https://git-scm.com/downloads)
-- [Windows](https://www.microsoft.com/en-gb/windows) or [Linux](https://ubuntu.com/)
+- A Discord Bot Token ([Create one here](https://discord.com/developers/applications))
 
-## 🚀 Getting Started
+## 🚀 Installation
 
-> [!WARNING]
-> Untested on MAC-OS
+### Windows
 
-## Windows Installation
-
-- Open command prompt (cmd.exe) and run the following commands
-
-```
+1. Open Command Prompt and clone the repository:
+```bash
 git clone https://github.com/Daniel-191/Echo
 cd Echo
+```
+
+2. Create and activate a virtual environment:
+```bash
 python -m venv venv
 venv\Scripts\activate
-pip install -r \src\databases\requirements.txt
 ```
 
-- Open the cloned directory in windows file explorer
-
-- Open config.json and add the following values
-
-  - Your Bot Token (essential)
-  - Your Bot Invite Link (optional)
-  - Your User ID (optional)
-
-- Now back to your terminal and run win_run.bat inside the terminal with the venv activated. (this is essential)
-
-```
-.\win_run.bat
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
 ```
 
-## Linux Installation
+4. Configure the bot:
+   - Open `config.json` in a text editor
+   - Add your **Bot Token** (required)
+   - Add your **User ID** as admin (optional)
+   - Add your **Bot Invite Link** (optional)
 
-- Open the terminal and run the following commands:
-
+5. Run the bot:
+```bash
+python main.py
 ```
+
+### Linux / macOS
+
+1. Open Terminal and clone the repository:
+```bash
 git clone https://github.com/Daniel-191/Echo
 cd Echo
+```
+
+2. Create and activate a virtual environment:
+```bash
 python3 -m venv venv
 source venv/bin/activate
-pip install -r src/databases/requirements.txt
 ```
-- Now open config.json (in the terminal), or open it in notepad++ if you prefer.
 
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
 ```
+
+4. Configure the bot:
+```bash
 nano config.json
 ```
+   - Add your **Bot Token** (required)
+   - Add your **User ID** as admin (optional)
+   - Add your **Bot Invite Link** (optional)
 
-- Add the following data to config.json:
+5. Run the bot:
+```bash
+python3 main.py
+```
 
-  - Your Bot Token (essential)
-  - Your Bot Invite Link (optional)
-  - Your User ID (optional)
+## 📝 Configuration
 
-- After that run the following commands to run the bot:
+Edit `config.json` with your settings:
+
+```json
+{
+  "token": "YOUR_BOT_TOKEN_HERE",
+  "prefix": "!",
+  "ADMIN_ID": 123456789012345678,
+  "invite_link": "https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID",
+  "link_ban": "false",
+  "daily_reward": 15000,
+  "carrot_plant_cost": 100,
+  "carrot_sell": 125,
+  "max_carrots": 1000,
+  "growth_duration": 12
+}
+```
+
+## 💬 Commands
+
+> Default prefix: `!`
+
+### General Commands
+
+| Command | Description |
+|---------|-------------|
+| `help` | Display all available commands |
+| `ping` | Check bot latency |
+| `avatar [@user]` | Display user's avatar |
+| `serverinfo` | Display server information |
+| `userinfo [@user]` | Display user information |
+| `membercount` | Show server member count |
+| `quote` | Get an inspiring quote |
+| `joke` | Get a random joke |
+| `8ball <question>` | Ask the magic 8-ball |
+| `coinflip <heads/tails>` | Flip a coin |
+| `dice` | Roll a dice |
+| `qr <text/link>` | Generate a QR code |
+| `calculator <expression>` | Perform calculations |
+
+### 💰 Economy Commands
+
+| Command | Description |
+|---------|-------------|
+| `balance [@user]` | Check wallet and bank balance |
+| `networth [@user]` | Check total net worth (including items) |
+| `baltop` | View the richest players leaderboard |
+| `daily` | Claim daily reward (15,000 credits) |
+| `pay <@user> <amount>` | Send money to another user |
+| `deposit <amount/max>` | Deposit money into bank (earns 10% daily interest) |
+| `withdraw <amount/max>` | Withdraw money from bank |
+
+### 🎯 Earning Commands
+
+| Command | Description |
+|---------|-------------|
+| `beg` | Beg for money (100-200 credits) |
+| `dig` | Dig for treasure (requires shovel, 1,000-1,600 credits) |
+| `hunt` | Hunt for items (requires bow, 600-1,300 credits) |
+| `scrap` | Scavenge for items (400-800 credits) |
+
+### 🎲 Gambling Commands
+
+| Command | Description |
+|---------|-------------|
+| `gamble <amount>` | Gamble credits with 33% win chance |
+| `rob <@user>` | Attempt to rob another player (45% success) |
+| `blackjack <amount>` | Play blackjack with interactive cards |
+| `slots <amount>` | Play the slot machine |
+
+### 🛒 Shop & Inventory
+
+| Command | Description |
+|---------|-------------|
+| `shop` | View items available for purchase |
+| `buy <item>` | Purchase an item from the shop |
+| `sell <item>` | Sell an item from your inventory |
+| `inventory [@user]` | View your or another user's inventory |
+| `trade <@user> <item>` | Trade an item with another player |
+| `cosmetics` | View all findable cosmetic items |
+
+### 🌾 Farming Commands
+
+| Command | Description |
+|---------|-------------|
+| `plant <amount/max>` | Plant carrots (100 credits each, 25% profit) |
+| `harvest` | Harvest grown crops after 12 hours |
+
+### 🔨 Crafting Commands
+
+| Command | Description |
+|---------|-------------|
+| `recipes` | View all craftable items and recipes |
+| `craft <item>` | Craft an item using materials |
+
+### 🎮 Action Commands
+
+| Command | Description |
+|---------|-------------|
+| `shoot <@user>` | Shoot someone (requires Gun or M4A1) |
+| `bomb <@user>` | Bomb someone (requires C4) |
+
+### 🛡️ Moderation Commands
+
+> Admin/Moderator only
+
+| Command | Description |
+|---------|-------------|
+| `kick <@user> [reason]` | Kick a member from the server |
+| `ban <@user> [reason]` | Ban a member from the server |
+| `mute <@user> [reason]` | Mute a member |
+| `unmute <@user>` | Unmute a member |
+| `clear <amount>` | Delete messages in bulk (1-100) |
+| `lockchannel [duration]` | Lock a channel temporarily |
+| `unlockchannel` | Unlock a locked channel |
+| `lockserver [duration]` | Lock the entire server |
+| `unlockserver` | Unlock the entire server |
+
+### ⚙️ Admin Commands
+
+> Bot owner only
+
+| Command | Description |
+|---------|-------------|
+| `give <@user> <amount>` | Give credits to a user |
+| `additem <@user> <item>` | Add an item to user's inventory |
+| `removeitem <@user> <item>` | Remove an item from user's inventory |
+| `config_view` | View current bot configuration |
+| `config_edit <key> <value>` | Edit bot configuration |
+
+## 🛒 Shop Items
+
+| Item | Description | Cost |
+|------|-------------|------|
+| Silver | Safe investment when bank is full | 1,000 |
+| Gold | High-value safe investment | 10,000 |
+| Shovel | Required for digging | 1,000 |
+| Bow | Required for hunting | 1,000 |
+
+## 🔨 Craftable Items
+
+| Item | Ingredients | Sell Value |
+|------|-------------|------------|
+| Joint | 1x Roll + 1x Weed | 10,000 |
+| Poo | 3x Charcoal + 1x Sulphur | 2,000 |
+| C4 | 2x Sulphur + 1x Charcoal + 1x Clock + 5x Potato + 2x Electronics | 25,000 |
+| Excalibur | 2x Gun + 1x Mythical Sword | 35,000 |
+| M4A1 | 2x Gun + 1x Stick | 30,000 |
+| 8 Incher | 1x Stick + 1x David's 4th Ball | 40,000 |
+| Complete Gauntlet | 1x Infinity Gauntlet + 1x Legendary Sword + 1x David's 4th Ball | 60,000 |
+| Glitch | 2x God | 50,000,000 |
+
+## 💎 Findable Items (Cosmetics)
+
+Found through `dig`, `hunt`, and `scrap` commands.
+
+| Item | Sell Value | Drop Chance |
+|------|------------|-------------|
+| God | 15,000,000 | 0.1% |
+| Mythical Sword | 12,500 | 5% |
+| Infinity Gauntlet | 30,000 | 5% |
+| David's 4th Ball | 25,000 | 7% |
+| Stick | 15,000 | 15% |
+| Legendary Sword | 5,000 | 15% |
+| Glock-18 | 8,000 | 19% |
+| Bow | 1,000 | 20% |
+| Shovel | 1,000 | 23% |
+| Rare Sword | 2,500 | 25% |
+| Weed | 5,000 | 30% |
+| Alarm Clock | 700 | 30% |
+| Roll | 1,500 | 33% |
+| Sulphur | 500 | 40% |
+| Charcoal | 300 | 50% |
+| Potato | 100 | 65% |
+
+## 📁 Project Structure
 
 ```
-chmod +x linux_run.sh
-./linux_run.sh
+Echo/
+├── cogs/                  # Command modules (Cogs)
+│   ├── economy/          # Economy system
+│   ├── blackjack.py      # Blackjack game
+│   ├── slots.py          # Slot machine
+│   ├── farming.py        # Farming system
+│   ├── crafting.py       # Crafting system
+│   ├── moderation.py     # Moderation commands
+│   ├── fun.py            # Fun commands
+│   └── help.py           # Help system
+├── utils/                # Utility modules
+│   ├── constants.py      # Configuration constants
+│   ├── utilities.py      # Helper functions
+│   └── eco_support.py    # Economy support functions
+├── data/                 # SQLite databases
+├── assets/              # Card images and assets
+├── docs/                # Documentation
+├── config.json          # Bot configuration
+├── main.py             # Entry point
+└── requirements.txt    # Python dependencies
+
 ```
-## General Commands
 
-| Command                   | Description                                      |
-|---------------------------|--------------------------------------------------|
-| `help`                    | Get help for commands.                           |
-| `economy`                 | List economy commands.                           |
-| `moderation`              | Get help for moderation commands (Admin only).   |
-| `ping`                    | Get the bot's current latency.                   |
-| `say <message>`           | Repeat a message.                                |
-| `coinflip <heads/tails`   | Flip a coin.                                     |
-| `avatar <@user>`          | Output a users avatar                            |
-| `dice`                    | Roll a six-sided die.                            |
-| `8ball <question>`        | Ask an 8ball a question.                         |
-| `quote`                   | Get a daily quote from an API.                   |
-| `qr <text/link>`          | Generate a QR code from a link.                  |
-| `membercount`             | Get the member count of the server.              |
-| `calculator <+-*/>`       | Perform basic calculations.                      |
-| `joke`                    | Get a random joke.                               |
-| `user_info <@user>`       | Get info on a user                               |
-| `server_info`             | Get the servers info                             |
+## 🤝 Contributing
 
-## Economy Commands
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project.
 
-| Command                  | Description                                           |
-|--------------------------|-------------------------------------------------------|
-| `balance`                | Checks your current bank and pocket balance.          |
-| `networth`               | Checks your total networth (assets included)          |
-| `baltop`                 | Displays the richest people leaderboard (networth)    |
-| `tutorial`               | A tutorial command (economy game only rn)             |
-| `daily`                  | Claims your daily reward.                             |
-| `shop`                   | Views available items in the shop.                    |
-| `trade <@user> <item_id>`| Gives an item to a player.                            |
-| `cosmetics`              | Lists available cosmetics and their prices.           |
-| `buy <item_id>`          | Buys an item from the shop.                           |
-| `sell <item_id>`         | Sells an item for its value.                          |
-| `beg`                    | Beg for money.                                        |
-| `hunt`                   | hunt for cosmetics and money. (with a bow)            |
-| `dig`                    | Dig for cosmetics and money. (with a shovel)          |
-| `scrap`                  | Find cosmetics and money.                             |
-| `shoot <@user>`          | Shoot a user with a gun or a M4A1                     |
-| `bomb <@user>`           | Bomb a user with C4                                   |
-| `inventory`              | Lists items in your inventory.                        |
-| `pay <amount>`           | Pay someone money.                                    |
-| `deposit <amount/max>`   | Deposit money into your bank (earns interest).        |
-| `withdraw <amount/max>`  | Withdraw money from your bank.                        |
-| `rob <@user>`            | Rob a user and potentially steal some of their money. |
-| `plant <amount/max>`     | Plant crops to sell later at a profit.                |
-| `harvest`                | Harvest your planted crops.                           |
-| `craft <recipe_name>`    | Craft items.                                          |
-| `recipes`                | Shows craftable items and required materials.         |
-| `gamble <amount>`        | Gamble your money with a 1/3 chance of winning.       |
-| `blackjack <amount>`     | Play a cool interactive blackjacks game.              |
-| `slots <amount>`         | Play slots with a small chance of winning big.        |
+## 📚 Documentation
 
-## Moderation Commands
+- [Architecture Guide](docs/ARCHITECTURE.md) - System design and implementation details
+- [API Reference](docs/API.md) - Complete command reference
 
-| Command             | Description                                      |
-|---------------------|--------------------------------------------------|
-| `kick <@user> <reason>` | Kick a user from the server.                 |
-| `ban <@user> <reason>`  | Ban a user from the server.                  |
-| `mute <@user> <reason>` | Mute a user in the server.                   |
-| `unmute <@user> <reason>` | Unmute a user in the server.               |
-| `clear <amount>`        | Clear a specified number of messages in a channel. |
-| `ticketpanel <message>` | Create a ticket panel for support.           |
-| `setup-verify <role_name> <message>` | Set up a verification panel.    |
-| `lockchannel`       | Lock a channel for a specified duration.         |
-| `unlockchannel`     | Unlock a channel.                                |
-| `lockserver`        | Lock the entire server for a specified duration. |
-| `unlockserver`      | Unlock the entire server.                        |
-| `config_view`       | Read config.json from discord (admin id only)    |
-| `config_edit <varialbe> <new_value>` | Edit config.json from discord.  |
+## ⚠️ Security Note
 
-## Shop (ingame)
+- **Never commit `config.json` with your bot token!**
+- Keep your bot token secret
+- Use environment variables in production
+- The `config.json` file is gitignored by default
 
-| Item   | Description                                | Cost  |
-|--------|--------------------------------------------|-------|
-| `Silver` | Bank full? Cant afford any gold? Buy some silver                              | 1000  |
-| `Gold`   | Too rich? Banks full? Invest some money into gold. No interest, but its safe. | 10000 |
-| `shovel` | Dig up treasure, find items and make money!                                   | 1000  |
-| `bow`    | You can now hunt animals! Sell what you find and make money while doing it.   | 1000  |
+## 📄 License
 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Craftable Items (ingame)
+## 🙏 Acknowledgments
 
-| Item               | Ingredients                                  | Description                                      |
-|--------------------|----------------------------------------------|--------------------------------------------------|
-| `Excalibur`         | 2 guns, 1 mythical_sword                      | A powerful sword that only the one can handle  |
-| `M4A1`              | 2 guns, 1 stick                               | Shoot down your enemies                        |
-| `8_Incher`          | 1 stick, 1 david4                             | A unique and 8 inch weapon                     |
-| `Complete_Gauntlet` | 1 infinity, 1 leg.sword, 1 david4             | The most powerful item in the game             |
-| `C4`                | 2 sulphur, 1 charcoal, 1 clock, 5 potatoes, 2 tech | C4 Bomb for bombing people                |
-| `Poo`               | 3 charcoal, 1 sulphur                         | Just poo                                       |
-| `Joint`             | 1 roll, 1 weed                                | Sell joints                                    |
-| `meth`              | 1 chemical, 1 red, create using `!cook`       | sell meth by using `!streets`                  |
-| `glitch`             |2x god (0.1% chance for each)                 | A glitch in the matrix                         |
+- Built with [discord.py](https://github.com/Rapptz/discord.py)
+- Card images for Blackjack game
+- Community contributors
 
-## Findable Items (ingame)
+---
 
-I call them 'cosmetics', but they are items you get from running: dig, hunt and scrap. These items can be used to craft items that sell for more e.g Joint, C4
-
-| Item             | Description                     | Sell Value | Chance (%) |
-|------------------|---------------------------------|------------|-------------|
-| `Rare Sword`       | Rare Sword                      | 2500       | 25          |
-| `Legendary Sword`  | Legendary Sword                 | 5000       | 15          |
-| `Mythical sword`   | Mythical sword                  | 12500      | 5           |
-| `god`              | An item that only the gods can hold | 15000000 | 0.1       |
-| `Shovel`           | Shovel used for digging         | 1000       | 23          |
-| `Bow`              | Bow used for hunting            | 1000       | 20          |
-| `Infinity Gauntlet`| Infinity Gauntlet               | 30000      | 5           |
-| `David's 4th ball` | David's 4th ball                | 25000      | 7           |
-| `Stick`            | Stick                           | 15000      | 15          |
-| `Glock-18`         | Glock-18                        | 8000       | 19          |
-| `Weed`             | Weed                            | 5000       | 30          |
-| `Sulphur`          | Sulphur                         | 500        | 40          |
-| `Charcoal`         | Charcoal                        | 300        | 50          |
-| `Alarm Clock`      | Alarm Clock                     | 700        | 30          |
-| `Roll`             | Roll paper for weed             | 1500       | 33          |
-| `Potato`           | Potato                          | 100        | 65          |
+<div align="center">
+  Made with ❤️ by mal023
+</div>
