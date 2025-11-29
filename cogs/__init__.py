@@ -17,7 +17,6 @@ from .help import Help
 # Extension cogs
 from .farming import Farming
 from .crafting import Crafting
-from .jobs import Jobs
 
 __all__ = [
     'Economy',
@@ -28,5 +27,4 @@ __all__ = [
     'Help',
     'Farming',
     'Crafting',
-    'Jobs',
 ]

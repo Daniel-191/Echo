@@ -155,11 +155,6 @@ Modular economy system split into:
 - Item combination system
 - Ingredient validation
 
-**`jobs.py`**
-- Job selection system
-- Salary collection
-- Interactive buttons
-
 #### Utility Cogs
 
 **`fun.py`**

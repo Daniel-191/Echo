@@ -12,8 +12,7 @@ from cogs import (
     Fun,
     Help,
     Farming,
-    Crafting,
-    Jobs
+    Crafting
 )
 
 
@@ -27,7 +26,6 @@ async def setup_bot():
     await bot.add_cog(Economy(bot))
     await bot.add_cog(Crafting(bot))
     await bot.add_cog(Farming(bot))
-    await bot.add_cog(Jobs(bot))
     await bot.add_cog(Fun(bot))
     await bot.add_cog(Help(bot))
     await bot.add_cog(Moderation(bot))

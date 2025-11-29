@@ -13,7 +13,6 @@ Complete reference for all commands available in Echo bot.
 - [Gambling Commands](#gambling-commands)
 - [Farming Commands](#farming-commands)
 - [Crafting Commands](#crafting-commands)
-- [Job Commands](#job-commands)
 - [Game Commands](#game-commands)
 - [Fun Commands](#fun-commands)
 - [Moderation Commands](#moderation-commands)
@@ -442,39 +441,6 @@ Craft an item from a recipe.
 | Complete Gauntlet | 1x Infinity Gauntlet, 1x Legendary Sword, 1x David's 4th Ball | 60,000 |
 | Poo | 3x Charcoal, 1x Sulphur | 2,000 |
 | Glitch | 2x God | 50,000,000 |
-
----
-
-## Job Commands
-
-### `.select_job`
-**Aliases:** `.job`, `.jobs`, `.list_jobs`
-
-Select a job to earn salary.
-
-**Examples:**
-```
-.job
-```
-
-**Available Jobs:**
-- **Freelancer**: 50-100 credits
-- **Gamer**: 20-80 credits
-- **Chef**: 30-70 credits
-
----
-
-### `.collect_salary`
-
-Collect your job salary.
-
-**Examples:**
-```
-.collect_salary
-```
-
-**Requirements:**
-- Must have selected a job first
 
 ---
 
