@@ -4,7 +4,7 @@
 
 <h1 align="center">
   <br>
-  Echo Bot v6
+  Echo Bot v6 
   <br>
 </h1>
 
