@@ -1,4 +1,4 @@
-<div align="center">
+<div align="center"> 
   <img src="https://github.com/Daniel-191/Echo/blob/main/images/bot_icon.png" alt="Echo Bot Image" width="400">
 </div>
 
